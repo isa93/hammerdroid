@@ -1,0 +1,80 @@
+function alignLogin() {
+    var wrapper = $('#login-wrapper');
+    var display_height = $(document).height();
+
+    wrapper.css('height', display_height - 20);
+}
+function checkInputs(inputName1,inputName2){
+    var inp1 = $("input[name='"+inputName1+"']");
+    var inp2 = $("input[name='"+inputName2+"']");
+
+    var email = $("input[name='email']");
+    email.on('blur',function(){
+        email.removeClass('valid');
+    });
+
+    $(document).on('keyup',"input[name='"+inputName1+"'], input[name='"+inputName2+"']",function(){
+        if(inp1.val()!=inp2.val()){
+            inp2.addClass('invalid');
+        } else {
+            inp2.removeClass('invalid');
+        }
+    });
+}
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.preview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function search_init() {
+    var activator = $('#searchActivator');
+    var search = $('#search');
+    var searchValue = $('#searchValue');
+    var btn = $('#searchBtn');
+
+    activator.on('click', function () {
+            search.toggle('slow');
+            if (search.hasClass('active')) {
+                search.removeClass('active');
+            } else {
+                search.addClass('active');
+                searchValue.focus();
+            }
+        }
+    );
+    activator.on('click', function () {
+
+    });
+    $('section').on('click', function () {
+        if (search.hasClass('active')) {
+            search.toggle('slow');
+            search.removeClass('active');
+        }
+    })
+}
+
+/* ___________________________________________________________*/
+
+$(document).ready(function () {
+    alignLogin();
+    search_init();
+    $(".button-collapse").sideNav();
+    $(".collapsible").collapsible();
+    $('select').material_select();
+    $('.materialboxed').materialbox();
+    $('.modal-trigger').leanModal();
+    $('.slider').slider();
+    $(".upload").change(function(){
+        readURL(this);
+    });
+    checkInputs('password','re_password');
+    checkInputs('new_password','re_new_password');
+});

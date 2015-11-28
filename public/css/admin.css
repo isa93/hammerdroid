@@ -1,0 +1,222 @@
+@import "flags.css";
+
+/* ___________________________________ERROR HANDLING__________________________________________ */
+.chip-holder {
+    display: inline-block;
+    width: 100%;
+    /*z-index: 50;*/
+    /*position: fixed;*/
+    /*bottom: 0;*/
+    /*right: 10px;*/
+    /*left: 10px;*/
+}
+
+.chip-holder .chip {
+    margin: 2px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 5px;
+    font-size: 13px;
+    /*white-space: nowrap;*/
+}
+.chip-holder .chip i{
+    line-height: 25px;
+}
+.chip-holder .chip span{
+    white-space: nowrap;
+}
+
+/* ____________________________________LOGIN_________________________________________________*/
+
+.login {
+    overflow: visible;
+}
+
+.login .card-title {
+    padding: 10px;
+}
+
+.login button {
+    z-index: 100;
+    position: absolute;
+    right: 10px;
+    bottom: -20px;
+}
+
+.login .input-field label {
+    color: #2195f2;
+}
+
+.login .input-field input[type=text]:focus + label {
+    color: #2195f2;
+}
+
+.login .input-field input[type=text]:focus {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+.login .input-field input[type=text].valid {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+.login .input-field input[type=text].invalid {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+.login .input-field input[type=password]:focus + label {
+    color: #2195f2;
+}
+
+.login .input-field input[type=password]:focus {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+.login .input-field input[type=password].valid {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+.login .input-field input[type=password].invalid {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+/* ______________________________________SEARCH______________________________________________________________________*/
+
+#search {
+    position: fixed;
+    top: 65px;
+    width: 100%;
+    display: none;
+    z-index: 100;
+}
+#search .card{
+    border-radius: 20px;
+}
+
+#search .input-field input[type=text]:focus {
+    border-bottom: 1px solid #2195f2;
+    box-shadow: 0 1px 0 0 #2195f2;
+}
+
+#searchBtn {
+    position: relative;
+    bottom: 5px;
+}
+
+/*_______________________________________ NAVBAR ____________________________________________________________________*/
+nav .dropdown-content{
+    height: auto;
+}
+nav #profile-options{
+    right: 0 !important;
+}
+@media(min-width: 993px){
+    nav{
+        padding-left: 240px;
+    }
+}
+.navbar-logo {
+    height: 64px;
+}
+
+@media (max-width: 600px) {
+    .navbar-logo {
+        height: 55px;
+    }
+}
+.navbar-profile{
+    height: 64px;
+}
+@media (max-width: 600px) {
+    .navbar-profile{
+        height: 56px;
+    }
+}
+.navbar-profile img{
+    height: 56px;
+    margin: 4px 0;
+}
+
+@media (max-width: 600px) {
+    .navbar-profile img{
+        height: 47px;
+        margin: 4px 0;
+    }
+}
+
+/* ___________________________________ SIDEBAR _______________________________________________________________________*/
+.side-nav li a{
+    font-size: 1.2em;
+}
+.side-nav li.active{
+    background: #256de3;
+}
+.side-nav .collapsible-body li.active{
+    background-color: #256de3 !important;
+}
+.side-nav li:hover{
+    background: #256de3;
+}
+.side-nav-header{
+    /*height:250px;*/
+    text-align: center;
+    background: #2979fe
+}
+.side-nav-header img{
+    margin-top: 10px;
+    max-width: 210px;
+}
+/*_________________________________ MAIN LAYOUT ______________________________________________________________________*/
+.page-title{
+    text-shadow: 1px 1px 2px gray;
+    font-size: 22px;
+}
+
+@media (min-width: 993px) {
+    section {
+        margin-left: 240px;
+    }
+}
+/*______________________________ DASHBOARD___________________________________________________________________________*/
+.slider .indicators .indicator-item.active{
+    background-color: #2195f2;
+}
+
+/*______________________________ PROFILE _____________________________________________________________________________*/
+
+.file-upload{
+    position: relative;
+    bottom:60px;
+    left:15px;
+    overflow: visible;
+    margin: 10px;
+
+}
+.file-upload input.upload{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.dropdown-content{
+    height: 240px;
+}
+
+/*__________________________ REGION _________________________________________________________*/
+
+.city-info span{
+    position: relative;
+    bottom: 5px;
+    left:5px;
+}

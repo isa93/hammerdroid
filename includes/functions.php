@@ -47,7 +47,7 @@ function make_date($year,$month,$day){
 
 function sorter(){
     if(isset($_GET['s'])){
-        $sort = get_sort_param($_GET['s']);
+        $sort = get_sort_param(strtolower($_GET['s']));
         $table = maxLengths('cities');
         $keys = array_keys($table);
         return !in_array($sort,$keys) ? 'name_srb' : $sort;

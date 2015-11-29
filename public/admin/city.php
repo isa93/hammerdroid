@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
     } else $message = array_shift($check);
 }
 
-
+$sort = sorter();
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'city'); ?>
@@ -117,7 +117,7 @@ if (isset($_POST['register'])) {
                 </div>
 
                 <!-- LIST CITIES -->
-                <div class="col s12 m10 offset-m1">
+                <div class="col s12">
 
                     <div class="card">
                         <span class="card-title blue-text accent-3" style="padding: 10px">All cities</span>
@@ -126,43 +126,101 @@ if (isset($_POST['register'])) {
 
                         <div class="row">
                             <div class="col s10 offset-s1">
-                                <?php
-                                $cities = find_all('cities', 'name_srb');
-                                foreach ($cities as $city):
+                                <table class="responsive-table centered highlight">
+
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <a <?= sorter_activator('srb') ?> href="city.php?s=srb"><div class="flag flag-rs"></div></a>
+                                            </th>
+                                            <th>
+                                                <a <?= sorter_activator('hun') ?> href="city.php?s=hun"><div class="flag flag-hu"></div></a>
+                                            </th>
+                                            <th>
+                                                <a <?= sorter_activator('eng') ?> href="city.php?s=eng"><div class="flag flag-gb"></div></a>
+                                            </th>
+                                            <th>
+                                                <a <?= sorter_activator('country') ?> href="city.php?s=country">Country</a>
+                                            </th>
+                                            <th>
+                                                <a <?= sorter_activator('altitude') ?> class="" href="city.php?s=altitude">Altitude</a>
+                                            </th>
+                                            <th>
+                                                <a <?= sorter_activator('wind_force') ?> href="city.php?s=wind_force">Wind force</a>
+                                            </th>
+                                            <th><span class="hide">Modify</span></th>
+                                            <th><span class="hide">Delete</span></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php
+                                    $cities = find_all('cities', $sort);
+                                    foreach ($cities as $city):
                                     ?>
-                                    <div class="row" style="padding: 5px;border: 1px dashed #e0e0e0">
-                                        <div class="col s9 city-info">
-                                            <div class="col s6">
-                                                <div class="flag flag-rs"></div><span><?= $city['name_srb'] ?></span><br>
-                                                <div class="flag flag-hu"></div><span><?= $city['name_hun'] ?></span><br>
-                                                <div class="flag flag-gb"></div><span><?= $city['name_eng'] ?></span><br>
-                                            </div>
-                                            <div class="col s6">
-                                                Country:
-                                                <?php
-                                                    $country = find_by_id('countries',$city['id']);
-                                                    echo $country['name_srb']."<br>";
-                                                ?>
-                                                <br>
-                                                Altitude:
-                                                <?= $city['altitude'] ?> m<br>
-                                                <br>
-                                                Wind force:
-                                                <?= $city['wind_force'] ?> m/s
-                                            </div>
-                                        </div>
-                                        <div class="s3 offset-s9">
-                                            <button type="submit" name="delete" style="margin-left: 10px"
-                                                    class="right btn-floating  red accent-4 waves-effect waves-light">
-                                                <i class="mdi-content-remove left"></i>
-                                            </button>
-                                            <button type="submit" name="modify"
-                                                    class="right btn-floating blue waves-effect waves-light">
-                                                <i class="material-icons">loop</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
+                                        <tr>
+                                            <td><?= $city['name_srb'] ?></td>
+                                            <td><?= $city['name_hun'] ?></td>
+                                            <td><?= $city['name_eng'] ?></td>
+                                            <td><?php $country = find_by_id('countries',$city['id']);echo $country['name_srb'];?></td>
+                                            <td><?= $city['altitude'] ?> m</td>
+                                            <td><?= $city['wind_force'] ?> <sup>m</sup><strong>&sol;</strong><sub>s</sub></td>
+                                            <td>
+                                                <button type="submit" name="modify" style="margin-left: 10px"
+                                                        class="btn-floating  blue waves-effect waves-light">
+                                                    <i class="material-icons">loop</i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="submit" name="delete" style="margin-left: 10px"
+                                                        class="btn-floating  red accent-4 waves-effect waves-light">
+                                                    <i class="mdi-content-remove"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                    </tbody>
+
+                                </table>
+
+
+<!--                                --><?php
+//                                $cities = find_all('cities', 'name_srb');
+//                                foreach ($cities as $city):
+//                                    ?>
+<!--                                    <div class="row" style="padding: 5px;border: 1px dashed #e0e0e0">-->
+<!--                                        <div class="col s9 city-info">-->
+<!--                                            <div class="col s6">-->
+<!--                                                <div class="flag flag-rs"></div><span>--><?//= $city['name_srb'] ?><!--</span><br>-->
+<!--                                                <div class="flag flag-hu"></div><span>--><?//= $city['name_hun'] ?><!--</span><br>-->
+<!--                                                <div class="flag flag-gb"></div><span>--><?//= $city['name_eng'] ?><!--</span><br>-->
+<!--                                            </div>-->
+<!--                                            <div class="col s6">-->
+<!--                                                Country:-->
+<!--                                                --><?php
+//                                                    $country = find_by_id('countries',$city['id']);
+//                                                    echo $country['name_srb']."<br>";
+//                                                ?>
+<!--                                                <br>-->
+<!--                                                Altitude:-->
+<!--                                                --><?//= $city['altitude'] ?><!-- m<br>-->
+<!--                                                <br>-->
+<!--                                                Wind force:-->
+<!--                                                --><?//= $city['wind_force'] ?><!-- m/s-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="s3 offset-s9">-->
+<!--                                            <button type="submit" name="delete" style="margin-left: 10px"-->
+<!--                                                    class="right btn-floating  red accent-4 waves-effect waves-light">-->
+<!--                                                <i class="mdi-content-remove left"></i>-->
+<!--                                            </button>-->
+<!--                                            <button type="submit" name="modify"-->
+<!--                                                    class="right btn-floating blue waves-effect waves-light">-->
+<!--                                                <i class="material-icons">loop</i>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                --><?php //endforeach; ?>
                             </div>
                         </div>
 

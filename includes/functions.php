@@ -44,3 +44,29 @@ function trim_value(&$value){
 function make_date($year,$month,$day){
     return implode('-',[$year,$month,$day]);
 }
+
+function sorter(){
+    if(isset($_GET['s'])){
+        $sort = get_sort_param($_GET['s']);
+        $table = maxLengths('cities');
+        $keys = array_keys($table);
+        return !in_array($sort,$keys) ? 'name_srb' : $sort;
+    }else return 'name_srb';
+}
+function sorter_activator($item){
+    $item = get_sort_param($item);
+    isset($_GET['s']) ? $param = get_sort_param($_GET['s']) : $param="";
+    return !empty($param) && $param==$item ? "class=\"sort\"" : null;
+}
+
+function get_sort_param($value){
+    $value = escape_value(trim($value));
+    $value = str_replace(" ","_",$value);
+
+    $value == "hun" || $value=="srb" || $value=="eng" ? $value="name_".$value : null;
+    $value == "country" ? $value = "id_country" : null;
+    $value == "group" ? $value = "id_group" : null;
+    $value == "wind" ? $value = "wind_force" : null;
+
+    return $value;
+}

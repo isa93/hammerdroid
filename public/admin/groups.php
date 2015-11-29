@@ -91,30 +91,50 @@ check_login();
 
                         <div class="row">
                             <div class="col s10 offset-s1">
-                                <?php
-                                $groups = find_all('structures_groups', 'name_srb');
-                                foreach ($groups as $group):
-                                    ?>
-                                    <div class="row" style="padding: 5px;border: 1px dashed #e0e0e0">
-                                        <div class="col s9 city-info">
+                                <table class="responsive-table centered highlight">
 
-                                            <div class="flag flag-rs"></div><span><?= $group['name_srb'] ?></span><br>
-                                            <div class="flag flag-hu"></div><span><?= $group['name_hun'] ?></span><br>
-                                            <div class="flag flag-gb"></div><span><?= $group['name_eng'] ?></span><br>
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="flag flag-rs"></div>
+                                        </th>
+                                        <th>
+                                            <div class="flag flag-hu"></div>
+                                        </th>
+                                        <th>
+                                            <div class="flag flag-gb"></div>
+                                        </th>
+                                        <th><span class="hide">Modify</span></th>
+                                        <th><span class="hide">Delete</span></th>
+                                    </tr>
+                                    </thead>
 
-                                        </div>
-                                        <div class="s3 offset-s9">
-                                            <button type="submit" name="delete" style="margin-left: 10px"
-                                                    class="right btn-floating  red accent-4 waves-effect waves-light">
-                                                <i class="mdi-content-remove left"></i>
-                                            </button>
-                                            <button type="submit" name="modify"
-                                                    class="right btn-floating blue waves-effect waves-light">
-                                                <i class="material-icons">loop</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
+                                    <tbody>
+                                    <?php
+                                    $groups = find_all('structures_groups', 'name_srb');
+                                    foreach ($groups as $group):
+                                        ?>
+                                        <tr>
+                                            <td><?= $group['name_srb'] ?></td>
+                                            <td><?= $group['name_hun'] ?></td>
+                                            <td><?= $group['name_eng'] ?></td>
+                                            <td>
+                                                <button type="submit" name="modify" style="margin-left: 10px"
+                                                        class="btn-floating  blue waves-effect waves-light">
+                                                    <i class="material-icons">loop</i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="submit" name="delete" style="margin-left: 10px"
+                                                        class="btn-floating  red accent-4 waves-effect waves-light">
+                                                    <i class="mdi-content-remove"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                    </tbody>
+
+                                </table>
                             </div>
                         </div>
 

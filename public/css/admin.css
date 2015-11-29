@@ -1,4 +1,7 @@
 @import "flags.css";
+html{
+    min-width: 360px;
+}
 
 /* ___________________________________ERROR HANDLING__________________________________________ */
 .chip-holder {
@@ -129,6 +132,13 @@ nav #profile-options{
         height: 55px;
     }
 }
+
+@media (max-width: 400px) {
+    .navbar-logo{
+        display: none;
+    }
+}
+
 .navbar-profile{
     height: 64px;
 }
@@ -219,4 +229,26 @@ nav #profile-options{
     position: relative;
     bottom: 5px;
     left:5px;
+}
+.sort{
+    position: relative;
+    top:10px;
+    font-size: 1.2em;
+    border-bottom: 3px solid #d0d0d0;
+}
+
+th{
+    position: relative;
+    top: 0;
+    transition: .6s ease top;
+}
+th:hover{
+    top: 10px;
+}
+
+table thead th{
+    max-height: 51px;
+}
+table tbody td{
+    min-height: 51px !important;
 }

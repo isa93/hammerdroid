@@ -45,18 +45,26 @@ function make_date($year,$month,$day){
     return implode('-',[$year,$month,$day]);
 }
 
-function sorter(){
+function sorter($default){
+    global $page;
     if(isset($_GET['s'])){
         $sort = get_sort_param(strtolower($_GET['s']));
         $table = maxLengths('cities');
         $keys = array_keys($table);
-        return !in_array($sort,$keys) ? 'name_srb' : $sort;
-    }else return 'name_srb';
+        return !in_array($sort,$keys) ? $default : $sort;
+    }else{
+//        $uri = $_SERVER['REQUEST_URI'];
+//        $uri = substr($uri,strrpos($uri,"/"));
+//        redirect_to($uri."?s=".$default);
+        return $default;
+    }
 }
 function sorter_activator($item){
+    global $sort;
     $item = get_sort_param($item);
     isset($_GET['s']) ? $param = get_sort_param($_GET['s']) : $param="";
-    return !empty($param) && $param==$item ? "class=\"sort\"" : null;
+    return (empty($param) && $sort==$item) || (!empty($param) && $param==$item) ?
+        "class=\"sort\"" : null;
 }
 
 function get_sort_param($value){
@@ -67,6 +75,11 @@ function get_sort_param($value){
     $value == "country" ? $value = "id_country" : null;
     $value == "group" ? $value = "id_group" : null;
     $value == "wind" ? $value = "wind_force" : null;
+
+    $value == "dimensions" ? $value = "id_dimensions" : null;
+    $value == "s" ? $value = "s (mm)" : null;
+    $value == "a" || $value == "wx" || $value == "wy" || $value == "ix" || $value == "iy" || $value == "jx" || $value=="jy" ?
+        ucfirst($value) : null;
 
     return $value;
 }

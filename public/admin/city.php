@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
     } else $message = array_shift($check);
 }
 
-$sort = sorter();
+$sort = sorter('name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'city'); ?>

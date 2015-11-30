@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
     } else $message = array_shift($check);
 }
 
-
+$sort = sorter('name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'country'); ?>
@@ -102,13 +102,13 @@ if (isset($_POST['register'])) {
                                     <thead>
                                     <tr>
                                         <th>
-                                            <div class="flag flag-rs"></div>
+                                            <a <?= sorter_activator('srb') ?> href="country.php?s=srb"><div class="flag flag-rs"></div></a>
                                         </th>
                                         <th>
-                                            <div class="flag flag-hu"></div>
+                                            <a <?= sorter_activator('hun') ?> href="country.php?s=hun"><div class="flag flag-hu"></div></a>
                                         </th>
                                         <th>
-                                            <div class="flag flag-gb"></div>
+                                            <a <?= sorter_activator('eng') ?> href="country.php?s=eng"><div class="flag flag-gb"></div></a>
                                         </th>
                                         <th><span class="hide">Modify</span></th>
                                         <th><span class="hide">Delete</span></th>
@@ -117,7 +117,7 @@ if (isset($_POST['register'])) {
 
                                     <tbody>
                                     <?php
-                                    $countries = find_all('countries', 'name_srb');
+                                    $countries = find_all('countries', $sort);
                                     foreach ($countries as $country):
                                         ?>
                                         <tr>

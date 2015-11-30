@@ -3,7 +3,7 @@ require_once "../../includes/initialize.php";
 check_login();
 
 
-
+$sort = sorter('name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'groups'); ?>
@@ -96,13 +96,13 @@ check_login();
                                     <thead>
                                     <tr>
                                         <th>
-                                            <div class="flag flag-rs"></div>
+                                            <a <?= sorter_activator('srb') ?> href="groups.php?s=srb"><div class="flag flag-rs"></div></a>
                                         </th>
                                         <th>
-                                            <div class="flag flag-hu"></div>
+                                            <a <?= sorter_activator('hun') ?> href="groups.php?s=hun"><div class="flag flag-hu"></div></a>
                                         </th>
                                         <th>
-                                            <div class="flag flag-gb"></div>
+                                            <a <?= sorter_activator('eng') ?> href="groups.php?s=eng"><div class="flag flag-gb"></div></a>
                                         </th>
                                         <th><span class="hide">Modify</span></th>
                                         <th><span class="hide">Delete</span></th>
@@ -111,7 +111,7 @@ check_login();
 
                                     <tbody>
                                     <?php
-                                    $groups = find_all('structures_groups', 'name_srb');
+                                    $groups = find_all('structures_groups', $sort);
                                     foreach ($groups as $group):
                                         ?>
                                         <tr>

@@ -232,18 +232,19 @@ nav #profile-options{
 }
 .sort{
     position: relative;
-    top:10px;
-    font-size: 1.2em;
+    top:5px;
+    font-size: 1.3em;
+    text-shadow: 0 0 1px blue;
     border-bottom: 3px solid #d0d0d0;
 }
 
 th{
     position: relative;
     top: 0;
-    transition: .6s ease top;
+    transition: .4s ease top;
 }
 th:hover{
-    top: 10px;
+    top: 5px;
 }
 
 table thead th{

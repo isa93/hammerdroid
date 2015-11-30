@@ -3,7 +3,7 @@ require_once "../../includes/initialize.php";
 check_login();
 
 
-
+$sort = sorter('name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'buildings'); ?>
@@ -96,15 +96,17 @@ check_login();
                                 <thead>
                                 <tr>
                                     <th>
-                                        <div class="flag flag-rs"></div>
+                                        <a <?= sorter_activator('srb') ?> href="buildings.php?s=srb"><div class="flag flag-rs"></div></a>
                                     </th>
                                     <th>
-                                        <div class="flag flag-hu"></div>
+                                        <a <?= sorter_activator('hun') ?> href="buildings.php?s=hun"><div class="flag flag-hu"></div></a>
                                     </th>
                                     <th>
-                                        <div class="flag flag-gb"></div>
+                                        <a <?= sorter_activator('eng') ?> href="buildings.php?s=eng"><div class="flag flag-gb"></div></a>
                                     </th>
-                                    <th>Group</th>
+                                    <th>
+                                        <a <?= sorter_activator('group') ?> href="buildings.php?s=group">Group</a>
+                                    </th>
                                     <th><span class="hide">Modify</span></th>
                                     <th><span class="hide">Delete</span></th>
                                 </tr>
@@ -112,7 +114,7 @@ check_login();
 
                                 <tbody>
                                 <?php
-                                $buildings = find_all('structures_buildings', 'name_srb');
+                                $buildings = find_all('structures_buildings', $sort);
                                 foreach ($buildings as $building):
                                     ?>
                                     <tr>

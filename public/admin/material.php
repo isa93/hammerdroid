@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
     } else $message = array_shift($check);
 }
 
-
+$sort = sorter('id_dimensions');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'material'); ?>
@@ -92,12 +92,12 @@ if (isset($_POST['register'])) {
                                 </div>
 
                                 <div class="input-field col s6">
-                                    <input type="number" step="0.01" name="lx" id="lx" value="">
-                                    <label for="lx">Lx</label>
+                                    <input type="number" step="0.01" name="ix" id="ix" value="">
+                                    <label for="ix">Ix</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input type="number" step="0.01" name="ly" id="ly" value="">
-                                    <label for="ly">Ly</label>
+                                    <input type="number" step="0.01" name="iy" id="iy" value="">
+                                    <label for="iy">Iy</label>
                                 </div>
 
                                 <div class="input-field col s6">
@@ -137,30 +137,74 @@ if (isset($_POST['register'])) {
 
                         <div class="row">
                             <div class="col s10 offset-s1">
-                                <?php
-                                $countries = find_all('countries', 'name_srb');
-                                foreach ($countries as $country):
-                                    ?>
-                                    <div class="row" style="padding: 5px;border: 1px dashed #e0e0e0">
-                                        <div class="col s9 city-info">
+                                <table class="responsive-table centered highlight">
 
-                                            <div class="flag flag-rs"></div><span><?= $country['name_srb'] ?></span><br>
-                                            <div class="flag flag-hu"></div><span><?= $country['name_hun'] ?></span><br>
-                                            <div class="flag flag-gb"></div><span><?= $country['name_eng'] ?></span><br>
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <a <?= sorter_activator('dimensions')?> href="material.php?s=dimensions">Dimensions</a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('s') ?> href="material.php?s=s">S</a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('a') ?> href="material.php?s=a">A</a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('wx') ?> href="material.php?s=wx">W<sub>x</sub></a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('wy') ?> href="material.php?s=wy">W<sub>y</sub></a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('ix') ?> href="material.php?s=ix">I<sub>x</sub></a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('iy') ?> href="material.php?s=iy">I<sub>y</sub></a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('jx') ?> href="material.php?s=jx" >J<sub>x</sub></a>
+                                        </th>
+                                        <th>
+                                            <a <?= sorter_activator('jy') ?> href="material.php?s=jy" >J<sub>y</sub></a>
+                                        </th>
+                                        <th><span class="hide">Modify</span></th>
+                                        <th><span class="hide">Delete</span></th>
+                                    </tr>
+                                    </thead>
 
-                                        </div>
-                                        <div class="s3 offset-s9">
-                                            <button type="submit" name="delete" style="margin-left: 10px"
-                                                    class="right btn-floating  red accent-4 waves-effect waves-light">
-                                                <i class="mdi-content-remove left"></i>
-                                            </button>
-                                            <button type="submit" name="modify"
-                                                    class="right btn-floating blue waves-effect waves-light">
-                                                <i class="material-icons">loop</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
+                                    <tbody>
+                                    <?php
+                                    $materials = find_all('data', $sort);
+                                    foreach ($materials as $material):
+                                        ?>
+                                        <tr>
+                                            <td><?php $dimension = find_by_id('dimensions',$material['id_dimensions']);echo $dimension['dimensions'];?></td>
+                                            <td><?= $material['s (mm)'] ?></td>
+                                            <td><?= $material['A'] ?></td>
+                                            <td><?= $material['Wx'] ?></td>
+                                            <td><?= $material['Wy'] ?></td>
+                                            <td><?= $material['Ix'] ?></td>
+                                            <td><?= $material['Iy'] ?></td>
+                                            <td><?= $material['Jx'] ?></td>
+                                            <td><?= $material['Jy'] ?></td>
+                                            <td>
+                                                <button type="submit" name="modify" style="margin-left: 10px"
+                                                        class="btn-floating  blue waves-effect waves-light">
+                                                    <i class="material-icons">loop</i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="submit" name="delete" style="margin-left: 10px"
+                                                        class="btn-floating  red accent-4 waves-effect waves-light">
+                                                    <i class="mdi-content-remove"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                    </tbody>
+
+                                </table>
                             </div>
                         </div>
 

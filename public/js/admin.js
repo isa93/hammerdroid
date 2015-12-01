@@ -4,7 +4,7 @@ function alignLogin() {
 
     wrapper.css('height', display_height - 20);
 }
-function checkInputs(inputName1, inputName2) {
+function checkInputsValue(inputName1, inputName2) {
     var inp1 = $("input[name='" + inputName1 + "']");
     var inp2 = $("input[name='" + inputName2 + "']");
 
@@ -21,6 +21,11 @@ function checkInputs(inputName1, inputName2) {
         }
     });
 }
+function firstInputFocus(){
+    var input = $("input:not([type='file'],[type='submit'],[type='button'],[type='hidden']):visible:first");
+    input.focus();
+    input.appendData("");
+}
 function readURL(input) {
 
     if (input.files && input.files[0]) {
@@ -34,7 +39,7 @@ function readURL(input) {
     }
 }
 
-function search_init() {
+function searchInit() {
     var activator = $('#searchActivator');
     var search = $('#search');
     var searchValue = $('#searchValue');
@@ -90,7 +95,8 @@ $("input[type='number']").keydown(function (e) {
 
 $(document).ready(function () {
     alignLogin();
-    search_init();
+    searchInit();
+    firstInputFocus();
     $(".button-collapse").sideNav();
     $(".collapsible").collapsible();
     $('select').material_select();
@@ -100,13 +106,6 @@ $(document).ready(function () {
     $(".upload").change(function () {
         readURL(this);
     });
-    var input = $("input:not([type='file'],[type='submit'],[type='button'],[type='hidden']):visible:first");
-    input.focus();
-    input.appendData("");
-    //input.on("focus", function () {
-    //    this.trigger("change");
-    //});
-    //$("label[for='" + input.attr('id') + "']");
-    checkInputs('password', 're_password');
-    checkInputs('new_password', 're_new_password');
+    checkInputsValue('password', 're_password');
+    checkInputsValue('new_password', 're_new_password');
 });

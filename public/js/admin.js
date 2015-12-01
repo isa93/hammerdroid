@@ -100,6 +100,7 @@ $(document).ready(function () {
     $(".upload").change(function () {
         readURL(this);
     });
+    $("input[type='text']").firstChild.focus();
     checkInputs('password', 're_password');
     checkInputs('new_password', 're_new_password');
 });

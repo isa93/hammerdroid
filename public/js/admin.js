@@ -100,7 +100,13 @@ $(document).ready(function () {
     $(".upload").change(function () {
         readURL(this);
     });
-    $("input[type='text']").firstChild.focus();
+    var input = $("input:not([type='file'],[type='submit'],[type='button'],[type='hidden']):visible:first");
+    input.focus();
+    input.appendData("");
+    //input.on("focus", function () {
+    //    this.trigger("change");
+    //});
+    //$("label[for='" + input.attr('id') + "']");
     checkInputs('password', 're_password');
     checkInputs('new_password', 're_new_password');
 });

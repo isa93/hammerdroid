@@ -30,7 +30,7 @@ if(isset($_GET['exp'])){
 
                         <div class="row">
                             <div class="input-field col s12 m10 offset-m1">
-                                <input type="text" class="validate " id="username" name="username" autofocus value="<?= isset($_POST['login']) ? $_POST['username'] : null;?>">
+                                <input type="text" class="validate " id="username" name="username" value="<?= isset($_POST['login']) ? $_POST['username'] : null;?>">
                                 <label for="username">Username or E-mail</label>
                             </div>
                             <div class="input-field col s12 m10 offset-m1">

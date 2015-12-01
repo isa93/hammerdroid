@@ -4,17 +4,17 @@ function alignLogin() {
 
     wrapper.css('height', display_height - 20);
 }
-function checkInputs(inputName1,inputName2){
-    var inp1 = $("input[name='"+inputName1+"']");
-    var inp2 = $("input[name='"+inputName2+"']");
+function checkInputs(inputName1, inputName2) {
+    var inp1 = $("input[name='" + inputName1 + "']");
+    var inp2 = $("input[name='" + inputName2 + "']");
 
     var email = $("input[name='email']");
-    email.on('blur',function(){
+    email.on('blur', function () {
         email.removeClass('valid');
     });
 
-    $(document).on('keyup',"input[name='"+inputName1+"'], input[name='"+inputName2+"']",function(){
-        if(inp1.val()!=inp2.val()){
+    $(document).on('keyup', "input[name='" + inputName1 + "'], input[name='" + inputName2 + "']", function () {
+        if (inp1.val() != inp2.val()) {
             inp2.addClass('invalid');
         } else {
             inp2.removeClass('invalid');
@@ -61,6 +61,31 @@ function search_init() {
     })
 }
 
+$("input[type='number']").keydown(function (e) {
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl+A
+        (e.keyCode == 65 && e.ctrlKey === true) ||
+            // Allow: Ctrl+C
+        (e.keyCode == 67 && e.ctrlKey === true) ||
+            // Allow: CTRL+V
+        (e.keyCode == 86 && e.ctrlKey === true) ||
+            // Allow: Ctrl+X
+        (e.keyCode == 88 && e.ctrlKey === true) ||
+            // Allow: home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+        // let it happen, don't do anything
+        return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+
+});
+
+
+
 /* ___________________________________________________________*/
 
 $(document).ready(function () {
@@ -72,9 +97,9 @@ $(document).ready(function () {
     $('.materialboxed').materialbox();
     $('.modal-trigger').leanModal();
     $('.slider').slider();
-    $(".upload").change(function(){
+    $(".upload").change(function () {
         readURL(this);
     });
-    checkInputs('password','re_password');
-    checkInputs('new_password','re_new_password');
+    checkInputs('password', 're_password');
+    checkInputs('new_password', 're_new_password');
 });

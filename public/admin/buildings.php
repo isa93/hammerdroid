@@ -27,7 +27,7 @@ $sort = sorter('name_srb');
 
         <div class="row container">
 
-            <!-- ADD GROUP -->
+            <!-- ADD BUILDING -->
             <div class="col s12 m10 offset-m1 l8 offset-l2">
 
                 <div class="card">
@@ -65,6 +65,29 @@ $sort = sorter('name_srb');
                             </div>
                         </div>
 
+                        <div class="col s10 offset-s1">
+                            <div class="col s11 offset-s1">
+                                    <?php
+                                    $groups = find_all('structures_groups', 'name_srb');
+                                    foreach ($groups as $group)
+                                        echo isset($_POST['id_group']) && $_POST['id_group'] == $group['id'] ?
+                                            "<div class='col s6'>
+                                                <input type=\"radio\" name=\"id_group\" id=\"{$group['id']}\" value=\"{$group['id']}\" checked>
+                                                <label for=\"{$group['id']}\">{$group['name_srb']}</label>
+                                            </div>"
+                                            :
+                                            "<div class='col s6'>
+                                                <input type=\"radio\" name=\"id_group\" id=\"{$group['id']}\" value=\"{$group['id']}\">
+                                                <label for=\"{$group['id']}\">{$group['name_srb']}</label>
+                                            </div>"
+                                            ;
+//                                            "<option value=\"" . $group['id'] . "\" selected>" . htmlentities($group['name_srb']) . "</option>\n" :
+//                                            "<option value=\"" . $group['id'] . "\">" . htmlentities($group['name_srb']) . "</option>\n";
+                                    ?>
+
+                            </div>
+                        </div>
+
                         <div class="col s8 offset-s2 m6 offset-m3 " style="padding: 20px">
                             <button type="submit" name="add"
                                     class="left btn-floating btn-large teal waves-effect waves-light">
@@ -81,7 +104,7 @@ $sort = sorter('name_srb');
 
             </div>
 
-            <!-- LIST GROUPS -->
+            <!-- LIST BUILDINGS -->
             <div class="col s12 m10 offset-m1">
 
                 <div class="card">

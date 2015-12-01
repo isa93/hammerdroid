@@ -10,6 +10,10 @@ if (isset($_POST['register'])) {
     } else $message = array_shift($check);
 }
 
+if(isset($_POST['add'])){
+    dump($_POST);exit;
+}
+
 $sort = sorter('name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
@@ -35,6 +39,7 @@ $sort = sorter('name_srb');
 
                 <!-- ADD CITY -->
                 <div class="col s12 m10 offset-m1 l8 offset-l2">
+                <form action="city.php" method="post" role="form">
 
                     <div class="card">
                         <span class="card-title blue-text accent-3" style="padding: 10px">Add new city</span>
@@ -114,6 +119,7 @@ $sort = sorter('name_srb');
 
                     </div>
 
+                </form>
                 </div>
 
                 <!-- LIST CITIES -->
@@ -182,45 +188,6 @@ $sort = sorter('name_srb');
                                     </tbody>
 
                                 </table>
-
-
-<!--                                --><?php
-//                                $cities = find_all('cities', 'name_srb');
-//                                foreach ($cities as $city):
-//                                    ?>
-<!--                                    <div class="row" style="padding: 5px;border: 1px dashed #e0e0e0">-->
-<!--                                        <div class="col s9 city-info">-->
-<!--                                            <div class="col s6">-->
-<!--                                                <div class="flag flag-rs"></div><span>--><?//= $city['name_srb'] ?><!--</span><br>-->
-<!--                                                <div class="flag flag-hu"></div><span>--><?//= $city['name_hun'] ?><!--</span><br>-->
-<!--                                                <div class="flag flag-gb"></div><span>--><?//= $city['name_eng'] ?><!--</span><br>-->
-<!--                                            </div>-->
-<!--                                            <div class="col s6">-->
-<!--                                                Country:-->
-<!--                                                --><?php
-//                                                    $country = find_by_id('countries',$city['id']);
-//                                                    echo $country['name_srb']."<br>";
-//                                                ?>
-<!--                                                <br>-->
-<!--                                                Altitude:-->
-<!--                                                --><?//= $city['altitude'] ?><!-- m<br>-->
-<!--                                                <br>-->
-<!--                                                Wind force:-->
-<!--                                                --><?//= $city['wind_force'] ?><!-- m/s-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="s3 offset-s9">-->
-<!--                                            <button type="submit" name="delete" style="margin-left: 10px"-->
-<!--                                                    class="right btn-floating  red accent-4 waves-effect waves-light">-->
-<!--                                                <i class="mdi-content-remove left"></i>-->
-<!--                                            </button>-->
-<!--                                            <button type="submit" name="modify"-->
-<!--                                                    class="right btn-floating blue waves-effect waves-light">-->
-<!--                                                <i class="material-icons">loop</i>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                --><?php //endforeach; ?>
                             </div>
                         </div>
 

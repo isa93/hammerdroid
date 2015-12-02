@@ -1,6 +1,5 @@
 <?php
 
-require_once LIB_PATH . DS . "config.php";
 require_once LIB_PATH . DS . "database.php";
 
 function authenticate($user, $password)
@@ -121,6 +120,9 @@ function modify_user(){
     $re_new_password = filter_input(INPUT_POST,'re_new_password');
 
     $message = "";
+    empty($id) ? $message .= "Id can't be empty!" : null;
+    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
+    ($user = find_by_id('users',$id)) == FALSE ? $message .= "Wrong user!\n" : null;
     empty($first_name) ? $message .= "Fill in the first name field!\n" : null;
     empty($last_name) ? $message .= "Fill in the last name field!\n" : null;
     empty($country) ? $message .= "Select a country!\n" : null;
@@ -173,9 +175,9 @@ function delete_user(){
     $id = filter_input(INPUT_POST,'id');
 
     $message = "";
-    empty($id) ? $message = "Can't delete user without an ID!\n" : null;
+    empty($id) ? $message = "Id can't be empty!\n" : null;
     $id==1 ? $message .= "Can't delete superuser account!\n" : null;
-    !is_numeric($id) ? $message .= "ID must be numeric!\n" : null;
+    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
 
     if(empty($message)){
         $image_check = delete_image(get_user_image($id));

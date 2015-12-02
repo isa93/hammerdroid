@@ -2,12 +2,28 @@
 require_once "../../includes/initialize.php";
 check_login();
 
-if (isset($_POST['register'])) {
+if(isset($_POST['load'])){
     array_filter($_POST, 'trim_value');
-    $check = add_user();
-    if (array_shift($check) === TRUE) {
-        redirect_to('list_admin.php');
-    } else $message = array_shift($check);
+    $check = load_country();
+    array_shift($check) === FALSE ? $message = array_shift($check) : null;
+}
+
+if(isset($_POST['add'])){
+    array_filter($_POST, 'trim_value');
+    $check = add_country();
+    array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
+}
+
+if(isset($_POST['modify'])){
+    array_filter($_POST, 'trim_value');
+    $check = modify_country();
+    array_shift($check) === FALSE ? $message = array_shift($check) : null;
+}
+
+if(isset($_POST['delete'])){
+    array_filter($_POST, 'trim_value');
+    $check = delete_country();
+    array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
 $sort = sorter('name_srb');
@@ -35,6 +51,7 @@ $sort = sorter('name_srb');
 
                 <!-- ADD COUNTRY -->
                 <div class="col s12 m10 offset-m1 l8 offset-l2">
+                <form action="country.php" method="post" role="form">
 
                     <div class="card">
                         <span class="card-title blue-text accent-3" style="padding: 10px">Add new country</span>
@@ -48,8 +65,10 @@ $sort = sorter('name_srb');
                                     <i class="flag flag-rs" style="margin: 0 auto;position: relative; top: 20px;"></i>
                                 </div>
                                 <div class="input-field col s10">
-                                    <input type="text" name="name_srb" id="name_srb" value="">
-                                    <label for="name_srb">Name</label>
+                                    <input type="text" name="name_srb" id="name_srb"
+                                           length="<?= get_maxLength('countries','name_srb') ?>"
+                                           value="<?= isset($_POST['name_srb']) ? $_POST['name_srb'] : null ?>">
+                                    <label for="name_srb">Name (Serbian)</label>
                                 </div>
 
 
@@ -57,8 +76,10 @@ $sort = sorter('name_srb');
                                     <i class="flag flag-hu" style="margin:0 auto;position: relative; top: 20px;"></i>
                                 </div>
                                 <div class="input-field col s10">
-                                    <input type="text" name="name_hun" id="name_hun" value="">
-                                    <label for="name_hun">Name</label>
+                                    <input type="text" name="name_hun" id="name_hun"
+                                           length="<?= get_maxLength('countries','name_hun')?>"
+                                           value="<?= isset($_POST['name_hun']) ? $_POST['name_hun'] : null ?>">
+                                    <label for="name_hun">Name (Hungarian)</label>
                                 </div>
 
 
@@ -66,13 +87,19 @@ $sort = sorter('name_srb');
                                     <i class="flag flag-gb" style="margin:0 auto;position: relative; top: 20px;"></i>
                                 </div>
                                 <div class="input-field col s10">
-                                    <input type="text" name="name_eng" id="name_eng" value="">
-                                    <label for="name_eng">Name</label>
+                                    <input type="text" name="name_eng" id="name_eng"
+                                           length="<?= get_maxLength('countries','name_eng') ?>"
+                                           value="<?= isset($_POST['name_eng']) ? $_POST['name_eng'] : null ?>">
+                                    <label for="name_eng">Name (English)</label>
                                 </div>
                             </div>
 
                             <div class="col s8 offset-s2 m6 offset-m3 " style="padding: 20px">
-                                <button type="submit" name="add"
+                                <?= isset($_POST['load_complete']) && $_POST['load_complete']==true ?
+                                    "<input type=\"hidden\" name=\"id\" value=\"{$_POST['id']}\">" :
+                                    null;
+                                ?>
+                                <button type="submit" name="<?= isset($_POST['load_complete']) && $_POST['load_complete']==true ? 'modify' : 'add' ?>"
                                         class="left btn-floating btn-large teal waves-effect waves-light">
                                     <i class="material-icons">done</i>
                                 </button>
@@ -85,6 +112,7 @@ $sort = sorter('name_srb');
 
                     </div>
 
+                </form>
                 </div>
 
                 <!-- LIST COUNTRIES -->
@@ -120,23 +148,26 @@ $sort = sorter('name_srb');
                                     $countries = find_all('countries', $sort);
                                     foreach ($countries as $country):
                                         ?>
-                                        <tr>
-                                            <td><?= $country['name_srb'] ?></td>
-                                            <td><?= $country['name_hun'] ?></td>
-                                            <td><?= $country['name_eng'] ?></td>
-                                            <td>
-                                                <button type="submit" name="modify" style="margin-left: 10px"
-                                                        class="btn-floating  blue waves-effect waves-light">
-                                                    <i class="material-icons">loop</i>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button type="submit" name="delete" style="margin-left: 10px"
-                                                        class="btn-floating  red accent-4 waves-effect waves-light">
-                                                    <i class="mdi-content-remove"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        <form action="country.php" method="post" role="form">
+                                            <tr>
+                                                <td><?= $country['name_srb'] ?></td>
+                                                <td><?= $country['name_hun'] ?></td>
+                                                <td><?= $country['name_eng'] ?></td>
+                                                <td>
+                                                    <input type="hidden" name="id" value="<?= $country['id'] ?>">
+                                                    <button type="submit" name="load" style="margin-left: 10px"
+                                                            class="btn-floating  blue waves-effect waves-light">
+                                                        <i class="material-icons">loop</i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" name="delete" style="margin-left: 10px"
+                                                            class="btn-floating  red accent-4 waves-effect waves-light">
+                                                        <i class="mdi-content-remove"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </form>
                                     <?php endforeach ?>
                                     </tbody>
 

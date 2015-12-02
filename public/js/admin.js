@@ -23,8 +23,14 @@ function checkInputsValue(inputName1, inputName2) {
 }
 function firstInputFocus(){
     var input = $("input:not([type='file'],[type='submit'],[type='button'],[type='hidden']):visible:first");
+    var inputVal = input.val();
     input.focus();
-    input.appendData("");
+    input.val(inputVal + " ");
+    input.trigger("change");
+    input.on("focusout",function(){
+        var inputVal = input.val();
+        input.val(inputVal.trim());
+    });
 }
 function readURL(input) {
 
@@ -78,7 +84,7 @@ $("input[type='number']").keydown(function (e) {
             // Allow: Ctrl+X
         (e.keyCode == 88 && e.ctrlKey === true) ||
             // Allow: home, end, left, right
-        (e.keyCode >= 35 && e.keyCode <= 39)) {
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
         // let it happen, don't do anything
         return;
     }

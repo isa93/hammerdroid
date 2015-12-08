@@ -45,11 +45,11 @@ function make_date($year,$month,$day){
     return implode('-',[$year,$month,$day]);
 }
 
-function sorter($default){
+function sorter($table,$default){
     global $page;
     if(isset($_GET['s'])){
         $sort = get_sort_param(strtolower($_GET['s']));
-        $table = maxLengths('cities');
+        $table = maxLengths($table);
         $keys = array_keys($table);
         return !in_array($sort,$keys) ? $default : $sort;
     }else{
@@ -72,13 +72,12 @@ function get_sort_param($value){
     $value = str_replace(" ","_",$value);
 
     $value == "hun" || $value=="srb" || $value=="eng" ? $value="name_".$value : null;
-    $value == "country" ? $value = "id_country" : null;
-    $value == "group" ? $value = "id_group" : null;
+    $value == "country" ? $value = "id_countries" : null;
+    $value == "group" ? $value = "id_groups" : null;
     $value == "wind" ? $value = "wind_force" : null;
 
     $value == "dimensions" ? $value = "id_dimensions" : null;
-    $value == "s" ? $value = "s (mm)" : null;
-    $value == "a" || $value == "wx" || $value == "wy" || $value == "ix" || $value == "iy" || $value == "jx" || $value=="jy" ?
+    $value == "a" || $value == "wx" || $value == "wy" || $value == "ix" || $value == "iy" || $value == "jx" || $value=="jy" || $value=="s" ?
         ucfirst($value) : null;
 
     return $value;

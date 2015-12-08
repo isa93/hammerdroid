@@ -26,7 +26,7 @@ if(isset($_POST['delete'])){
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
-$sort = sorter('name_srb');
+$sort = sorter('cities','name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'city'); ?>
@@ -97,12 +97,12 @@ $sort = sorter('name_srb');
 
                             <div class="col s10 offset-s1">
                                 <div class="input-field country col s11 offset-s1">
-                                    <select name="id_country" id="country">
-                                        <option value="" <?= !isset($_POST['id_country']) ? 'selected' : null?>>Choose</option>
+                                    <select name="id_countries" id="country">
+                                        <option value="" <?= !isset($_POST['id_countries']) ? 'selected' : null?>>Choose</option>
                                         <?php
                                         $countries = find_all('countries', 'name_srb');
                                         foreach ($countries as $country)
-                                            echo isset($_POST['id_country']) && $_POST['id_country'] == $country['id'] ?
+                                            echo isset($_POST['id_countries']) && $_POST['id_countries'] == $country['id'] ?
                                                 "<option value=\"" . $country['id'] . "\" selected>" . htmlentities($country['name_srb']) . "</option>\n" :
                                                 "<option value=\"" . $country['id'] . "\">" . htmlentities($country['name_srb']) . "</option>\n";
                                         ?>
@@ -195,7 +195,7 @@ $sort = sorter('name_srb');
                                                 <td><?= $city['name_srb'] ?></td>
                                                 <td><?= $city['name_hun'] ?></td>
                                                 <td><?= $city['name_eng'] ?></td>
-                                                <td><?php $country = find_by_id('countries',$city['id_country']);echo $country['name_srb'];?></td>
+                                                <td><?php $country = find_by_id('countries',$city['id_countries']);echo $country['name_srb'];?></td>
                                                 <td><?= $city['altitude'] ?> m</td>
                                                 <td><?= $city['wind_force'] ?> <sup>m</sup><strong>&sol;</strong><sub>s</sub></td>
                                                 <td>

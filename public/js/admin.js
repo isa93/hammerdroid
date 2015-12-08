@@ -109,6 +109,7 @@ $(document).ready(function () {
     $('.materialboxed').materialbox();
     $('.modal-trigger').leanModal();
     $('.slider').slider();
+    $('ul.tabs').tabs();
     $(".upload").change(function () {
         readURL(this);
     });

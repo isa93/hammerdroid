@@ -2,7 +2,7 @@
 
 require_once LIB_PATH . DS . "database.php";
 
-function load_city(){
+function load_group(){
     array_filter($_POST, 'escape_value');
 
     $id = filter_input(INPUT_POST,'id');
@@ -10,131 +10,16 @@ function load_city(){
     $message = "";
     empty($id) ? $message .= "Id can't be empty!" : null;
     !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($city = find_by_id('cities',$id)) == FALSE ? $message .= "Wrong city!\n" : null;
+    ($group = find_by_id('groups',$id)) == FALSE ? $message .= "Wrong group!\n" : null;
 
     if(empty($message)){
-        $_POST = $city;
+        $_POST = $group;
         $_POST['load_complete'] = true;
         return [true];
     } else return [false, $message];
 }
 
-function add_city(){
-    array_filter($_POST, 'escape_value');
-
-    $name_srb = filter_input(INPUT_POST, 'name_srb');
-    $name_hun = filter_input(INPUT_POST, 'name_hun');
-    $name_eng = filter_input(INPUT_POST, 'name_eng');
-    $id_country = filter_input(INPUT_POST, 'id_countries');
-    $altitude = filter_input(INPUT_POST, 'altitude');
-    $wind_force = filter_input(INPUT_POST, 'wind_force');
-
-    $message = "";
-    empty($name_srb) ? $message .= "Fill in the name(Serbian) filed!\n" : null;
-    empty($name_hun) ? $message .= "Fill in the name(Hungarian) field!\n" : null;
-    empty($name_eng) ? $message .= "Fill in the name(English) field!\n" : null;
-    empty($id_country) ? $message .= "Select a country!\n" : null;
-    !empty($id_country) && ($check = find_by_id('countries',$id_country)) == FALSE ? $message .="Wrong country selected!\n" : null;
-    empty($altitude) ? $message .= "Fill in the altitude field!\n" : null;
-    !empty($altitude) && !is_numeric($altitude) ? $message .= "Altitude must be numeric!\n" : null;
-    empty($wind_force) ? $message .= "Fill in the wind force field!\n" : null;
-    !empty($wind_force) && !is_numeric($wind_force) ? $message .= "Wind fore must be numeric!\n" : null;
-
-    if(empty($message)){
-        $sql = "INSERT INTO cities (id_countries, name_srb, name_hun, name_eng, altitude, wind_force) ";
-        $sql .= "VALUES (";
-        $sql .= "'{$id_country}', ";
-        $sql .= "'{$name_srb}', ";
-        $sql .= "'{$name_hun}', ";
-        $sql .= "'{$name_eng}', ";
-        $sql .= "'{$altitude}', ";
-        $sql .= "'{$wind_force}')";
-
-        query($sql);
-        return affected_rows() ? [true] : [false,"Database insert failed!"];
-    } else return [false, $message];
-}
-
-function modify_city(){
-    array_filter($_POST, 'escape_value');
-
-    $id = filter_input(INPUT_POST,'id');
-    $name_srb = filter_input(INPUT_POST, 'name_srb');
-    $name_hun = filter_input(INPUT_POST, 'name_hun');
-    $name_eng = filter_input(INPUT_POST, 'name_eng');
-    $id_country = filter_input(INPUT_POST, 'id_countries');
-    $altitude = filter_input(INPUT_POST, 'altitude');
-    $wind_force = filter_input(INPUT_POST, 'wind_force');
-
-    $message = "";
-    empty($id) ? $message .= "Id can't be empty!" : null;
-    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($city = find_by_id('cities',$id)) == FALSE ? $message .= "Wrong user!\n" : null;
-    empty($name_srb) ? $message .= "Fill in the name(Serbian) filed!\n" : null;
-    empty($name_hun) ? $message .= "Fill in the name(Hungarian) field!\n" : null;
-    empty($name_eng) ? $message .= "Fill in the name(English) field!\n" : null;
-    empty($id_country) ? $message .= "Select a country!\n" : null;
-    !empty($id_country) && ($check = find_by_id('countries',$id_country)) == FALSE ? $message .="Wrong country selected!\n" : null;
-    empty($altitude) ? $message .= "Fill in the altitude field!\n" : null;
-    !empty($altitude) && !is_numeric($altitude) ? $message .= "Altitude must be numeric!\n" : null;
-    empty($wind_force) ? $message .= "Fill in the wind force field!\n" : null;
-    !empty($wind_force) && !is_numeric($wind_force) ? $message .= "Wind fore must be numeric!\n" : null;
-
-    if(empty($message)){
-        $sql = "UPDATE cities SET ";
-        $sql .= "name_srb='{$name_srb}', ";
-        $sql .= "name_hun='{$name_hun}', ";
-        $sql .= "name_eng='{$name_eng}', ";
-        $sql .= "id_countries='{$id_country}', ";
-        $sql .= "altitude='{$altitude}', ";
-        $sql .= "wind_force='{$wind_force}' ";
-        $sql .= "WHERE id='{$id}'";
-
-        query($sql);
-        return affected_rows() ? [true] : [false, "Database update failed!"];
-    } else return [false, $message];
-}
-
-function delete_city(){
-    array_filter($_POST, 'escape_value');
-
-    $id = filter_input(INPUT_POST,'id');
-
-    $message = "";
-    empty($id) ? $message = "Id can't be empty!\n" : null;
-    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($city = find_by_id('cities',$id)) == FALSE ? $message .= "Wrong city!\n" : null;
-
-    if(empty($message)){
-        $sql = "DELETE FROM cities ";
-        $sql .= "WHERE id='{$id}' ";
-        $sql .= "LIMIT 1";
-
-        query($sql);
-        return affected_rows() ? [true] : [false, "Database delete failed!"];
-    } else return [false, $message];
-}
-
-/* _________________________ COUNTRY __________________________*/
-
-function load_country(){
-    array_filter($_POST, 'escape_value');
-
-    $id = filter_input(INPUT_POST,'id');
-
-    $message = "";
-    empty($id) ? $message .= "Id can't be empty!" : null;
-    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($city = find_by_id('countries',$id)) == FALSE ? $message .= "Wrong city!\n" : null;
-
-    if(empty($message)){
-        $_POST = $city;
-        $_POST['load_complete'] = true;
-        return [true];
-    } else return [false, $message];
-}
-
-function add_country(){
+function add_group(){
     array_filter($_POST, 'escape_value');
 
     $name_srb = filter_input(INPUT_POST, 'name_srb');
@@ -147,7 +32,7 @@ function add_country(){
     empty($name_eng) ? $message .= "Fill in the name(English) field!\n" : null;
 
     if(empty($message)){
-        $sql = "INSERT INTO countries (name_srb, name_hun, name_eng) ";
+        $sql = "INSERT INTO groups (name_srb, name_hun, name_eng) ";
         $sql .= "VALUES (";
         $sql .= "'{$name_srb}', ";
         $sql .= "'{$name_hun}', ";
@@ -158,7 +43,7 @@ function add_country(){
     } else return [false, $message];
 }
 
-function modify_country(){
+function modify_group(){
     array_filter($_POST, 'escape_value');
 
     $id = filter_input(INPUT_POST,'id');
@@ -169,13 +54,13 @@ function modify_country(){
     $message = "";
     empty($id) ? $message .= "Id can't be empty!" : null;
     !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($city = find_by_id('countries',$id)) == FALSE ? $message .= "Wrong country!\n" : null;
+    ($group = find_by_id('groups',$id)) == FALSE ? $message .= "Wrong group!\n" : null;
     empty($name_srb) ? $message .= "Fill in the name(Serbian) filed!\n" : null;
     empty($name_hun) ? $message .= "Fill in the name(Hungarian) field!\n" : null;
     empty($name_eng) ? $message .= "Fill in the name(English) field!\n" : null;
 
     if(empty($message)){
-        $sql = "UPDATE countries SET ";
+        $sql = "UPDATE groups SET ";
         $sql .= "name_srb='{$name_srb}', ";
         $sql .= "name_hun='{$name_hun}', ";
         $sql .= "name_eng='{$name_eng}' ";
@@ -186,7 +71,7 @@ function modify_country(){
     } else return [false, $message];
 }
 
-function delete_country(){
+function delete_group(){
     array_filter($_POST, 'escape_value');
 
     $id = filter_input(INPUT_POST,'id');
@@ -194,10 +79,109 @@ function delete_country(){
     $message = "";
     empty($id) ? $message = "Id can't be empty!\n" : null;
     !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($city = find_by_id('countries',$id)) == FALSE ? $message .= "Wrong country!\n" : null;
+    ($group = find_by_id('groups',$id)) == FALSE ? $message .= "Wrong group!\n" : null;
 
     if(empty($message)){
-        $sql = "DELETE FROM countries ";
+        $sql = "DELETE FROM groups ";
+        $sql .= "WHERE id='{$id}' ";
+        $sql .= "LIMIT 1";
+
+        query($sql);
+        return affected_rows() ? [true] : [false, "Database delete failed!"];
+    } else return [false, $message];
+}
+
+/*___________________________ BUILDINGS ___________________*/
+
+function load_building(){
+    array_filter($_POST, 'escape_value');
+
+    $id = filter_input(INPUT_POST,'id');
+
+    $message = "";
+    empty($id) ? $message .= "Id can't be empty!" : null;
+    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
+    ($building = find_by_id('buildings',$id)) == FALSE ? $message .= "Wrong building!\n" : null;
+
+    if(empty($message)){
+        $_POST = $building;
+        $_POST['load_complete'] = true;
+        return [true];
+    } else return [false, $message];
+}
+
+function add_building(){
+    array_filter($_POST, 'escape_value');
+
+    $name_srb = filter_input(INPUT_POST, 'name_srb');
+    $name_hun = filter_input(INPUT_POST, 'name_hun');
+    $name_eng = filter_input(INPUT_POST, 'name_eng');
+    $id_group = filter_input(INPUT_POST, 'id_groups');
+
+    $message = "";
+    empty($name_srb) ? $message .= "Fill in the name(Serbian) filed!\n" : null;
+    empty($name_hun) ? $message .= "Fill in the name(Hungarian) field!\n" : null;
+    empty($name_eng) ? $message .= "Fill in the name(English) field!\n" : null;
+    empty($id_group) ? $message .= "Select a group!\n" : null;
+    !empty($id_group) && ($check = find_by_id('groups',$id_group)) == FALSE ? $message .= "Wrong group selected!\n" : null;
+
+    if(empty($message)){
+        $sql = "INSERT INTO buildings (name_srb, name_hun, name_eng, id_groups) ";
+        $sql .= "VALUES (";
+        $sql .= "'{$name_srb}', ";
+        $sql .= "'{$name_hun}', ";
+        $sql .= "'{$name_eng}', ";
+        $sql .= "'{$id_group}') ";
+
+        query($sql);
+        return affected_rows() ? [true] : [false,"Database insert failed!"];
+    } else return [false, $message];
+}
+
+function modify_building(){
+    array_filter($_POST, 'escape_value');
+
+    $id = filter_input(INPUT_POST,'id');
+    $name_srb = filter_input(INPUT_POST, 'name_srb');
+    $name_hun = filter_input(INPUT_POST, 'name_hun');
+    $name_eng = filter_input(INPUT_POST, 'name_eng');
+    $id_group = filter_input(INPUT_POST, 'id_groups');
+
+    $message = "";
+    empty($id) ? $message .= "Id can't be empty!" : null;
+    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
+    ($building = find_by_id('buildings',$id)) == FALSE ? $message .= "Wrong building!\n" : null;
+    empty($name_srb) ? $message .= "Fill in the name(Serbian) filed!\n" : null;
+    empty($name_hun) ? $message .= "Fill in the name(Hungarian) field!\n" : null;
+    empty($name_eng) ? $message .= "Fill in the name(English) field!\n" : null;
+    empty($id_group) ? $message .= "Select a group!\n" : null;
+    !empty($id_group) && ($check = find_by_id('groups',$id_group)) == FALSE ? $message .= "Wrong group selected!\n" : null;
+
+    if(empty($message)){
+        $sql = "UPDATE buildings SET ";
+        $sql .= "name_srb='{$name_srb}', ";
+        $sql .= "name_hun='{$name_hun}', ";
+        $sql .= "name_eng='{$name_eng}', ";
+        $sql .= "id_groups='{$id_group}' ";
+        $sql .= "WHERE id='{$id}'";
+
+        query($sql);
+        return affected_rows() ? [true] : [false, "Database update failed!"];
+    } else return [false, $message];
+}
+
+function delete_building(){
+    array_filter($_POST, 'escape_value');
+
+    $id = filter_input(INPUT_POST,'id');
+
+    $message = "";
+    empty($id) ? $message = "Id can't be empty!\n" : null;
+    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
+    ($building = find_by_id('buildings',$id)) == FALSE ? $message .= "Wrong building!\n" : null;
+
+    if(empty($message)){
+        $sql = "DELETE FROM buildings ";
         $sql .= "WHERE id='{$id}' ";
         $sql .= "LIMIT 1";
 

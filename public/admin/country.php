@@ -26,7 +26,7 @@ if(isset($_POST['delete'])){
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
-$sort = sorter('name_srb');
+$sort = sorter('countries','name_srb');
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav', 'country'); ?>

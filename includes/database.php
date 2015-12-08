@@ -78,9 +78,63 @@ function escape_value($value)
 
 /*_______________________________________*/
 
-function find_all($table_name,$order="first_name")
+function find_all($parent_table,$order="id")
 {
-    return find_by_sql("SELECT * FROM " . $table_name . " ORDER BY " . $order . " ASC ");
+
+    return find_by_sql("SELECT * FROM {$parent_table} ORDER BY {$order} ASC");
+
+
+//    $order[0]=$order;
+//    $keys = array_keys(maxLengths($parent_table));
+//    $ibfk = [];
+//    foreach($keys as $key){
+//        $check = strpos($key,"id_");
+//        $check !== false ? $ibfk[$key] = substr($key,3) : null;
+//    }
+//
+//    $parent_array = find_by_sql("SELECT * FROM {$parent_table}");
+//    if(!empty($ibfk)){
+//        foreach($parent_array as $i => $item){
+//            foreach($ibfk as $cell => $child_table){
+//                $child_array = find_by_id($child_table,$item[$cell]);
+//                dump($item);
+//                $item['teszt'] = $child_array;
+//            }
+//        }
+//    }
+//
+////    dump($parent_array);
+//    exit;
+//
+//    $return = false;
+//    $sort_array = [];
+//    foreach($parent_array as $item){
+//        foreach($item as $key => $value){
+//            if(!isset($sort_array[$key])){
+//                $sort_array[$key] = array();
+//            }
+//            $sort_array[$key][]=$value;
+//        }
+//    }
+//    array_multisort($sort_array[$order],SORT_ASC,$parent_array);
+//    $return = $parent_array;
+
+//    if(!empty($ibfk)){
+//        foreach($ibfk as $cell=>$child_table) {
+//            $child_array = find_by_id($child_table,$parent_array[$cell]);
+//            $sql = "SELECT " . substr($parent_table,0,3) . ".* FROM {$parent_table} " . substr($parent_table, 0, 3) . " ";
+//            $sql .= "LEFT JOIN {$child_table} " . substr($child_table, 0, 3) .
+//                " ON " . substr($parent_table, 0, 3) . ".{$cell} = " . substr($child_table, 0, 3) . ".id ";
+//            $sql .= "UNION ";
+//            $sql .= "SELECT " . substr($parent_table,0,3) . "* FROM {$parent_table} " . substr($parent_table, 0, 3) . " ";
+//            $sql .= "RIGHT JOIN {$child_table} " . substr($child_table, 0, 3) .
+//                " ON " . substr($parent_table, 0, 3) . ".{$cell} = " . substr($child_table, 0, 3) . ".id ";
+//            $sql .= "ORDER BY {$order} ASC";
+//        }
+//
+//    } else $return = array_multisort($order[0],SORT_ASC,$parent_array);
+
+//    return($return);
 }
 
 function count_all($table_name)

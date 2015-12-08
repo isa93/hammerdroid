@@ -24,3 +24,7 @@ require_once LIB_PATH . DS . "image.php";
 
 require_once LIB_PATH . DS . "region.php";
 
+require_once LIB_PATH . DS . "structure.php";
+
+require_once LIB_PATH . DS . "material.php";
+

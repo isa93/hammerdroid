@@ -23,7 +23,7 @@ check_login();
 
         <div class="row container">
             <?php
-            $admins = find_all('users');
+            $admins = find_all('users','first_name');
             foreach($admins as $admin):
                $image = get_user_image($admin['id']);
             ?>

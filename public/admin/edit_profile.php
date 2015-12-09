@@ -3,7 +3,7 @@ require_once "../../includes/initialize.php";
 check_login();
 
 if (isset($_POST['modify'])) {
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = modify_user();
     if (array_shift($check) === TRUE) {
         redirect_to('profile.php');

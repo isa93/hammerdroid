@@ -39,6 +39,7 @@ function check_mail($email){
 
 function trim_value(&$value){
     $value = trim($value);
+    return true;
 }
 
 function make_date($year,$month,$day){

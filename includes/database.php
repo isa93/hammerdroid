@@ -63,17 +63,66 @@ function escape_value($value)
 {
     global $connection;
 
-    $magic_quotes = get_magic_quotes_gpc();
-    $real_escape_string = function_exists('mysqli_real_escape_string');
-
-    if ($real_escape_string) {
-        $magic_quotes ? $value = stripcslashes($value) : null;
-        $value = mysqli_real_escape_string($connection, $value);
-    } else {
-        $magic_quotes ? $value = addslashes($value) : null;
+    $value = strip_tags($value);
+    while(is_int(strpos($value,"'"))){
+        $value = str_replace("'","",$value);
     }
+    while(is_int(strpos($value,chr(34)))){ // "
+        $value = str_replace(chr(34),"",$value);
+    }
+    while(is_int(strpos($value,chr(47)))){ // /
+        $value = str_replace(chr(47),"",$value);
+    }
+    while(is_int(strpos($value,"`"))){
+        $value = str_replace("`","",$value);
+    }
+    while(is_int(strpos($value,"~"))){
+        $value = str_replace("~","",$value);
+    }
+    while(is_int(strpos($value,";"))){
+        $value = str_replace(";","",$value);
+    }
+    while(is_int(strpos($value,"*"))){
+        $value = str_replace("*","",$value);
+    }
+    while(is_int(strpos($value,"%"))){
+        $value = str_replace("%","",$value);
+    }
+    while(is_int(strpos($value,"$"))){
+        $value = str_replace("$","",$value);
+    }
+    while(is_int(strpos($value,"<"))){
+        $value = str_replace("<","",$value);
+    }
+    while(is_int(strpos($value,">"))){
+        $value = str_replace(">","",$value);
+    }
+    $value = str_ireplace("drop","",$value);
+    $value = str_ireplace("crypt","",$value);
+    $value = str_ireplace("select","",$value);
+    $value = str_ireplace("delete","",$value);
+    $value = str_ireplace("insert","",$value);
+    $value = str_ireplace("update","",$value);
+    $value = str_ireplace("from","",$value);
+    $value = stripslashes(stripslashes($value));
 
-    return $value;
+
+//    $magic_quotes = get_magic_quotes_gpc();
+//    $real_escape_string = function_exists('mysqli_real_escape_string');
+//
+//    if ($real_escape_string) {
+//        $magic_quotes ? $value = stripcslashes($value) : null;
+//        $value = mysqli_real_escape_string($connection, $value);
+//    } else {
+//        $magic_quotes ? $value = addslashes($value) : null;
+//    }
+
+    return trim(mysqli_real_escape_string($connection,$value));
+}
+
+function clean(&$value){
+    $value = escape_value($value);
+    return true;
 }
 
 /*_______________________________________*/

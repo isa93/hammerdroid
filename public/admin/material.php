@@ -3,31 +3,31 @@ require_once "../../includes/initialize.php";
 check_login();
 
 if(isset($_POST['load'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = load_material();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
 if(isset($_POST['add'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = add_material();
     array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
 }
 
 if(isset($_POST['modify'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = modify_material();
-    array_shift($check) === FALSE ? $message = array_shift($check) : null;
+    array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
 }
 
 if(isset($_POST['delete'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = delete_material();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
-if(isset($_POST['drop_dimension'])){
-    array_filter($_POST,'trim_value');
+if(isset($_POST['drop'])){
+    $_POST = array_filter($_POST, 'trim_value');
     $check = delete_dimension();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
@@ -67,7 +67,7 @@ $sort = sorter('data','id_dimensions');
 
                             <div class="col s10 offset-s1 ">
                                 <div class="input-field col s5">
-                                    <input type="text" name="new_dimension" id="new_dimension"
+                                    <input type="text" name="new_dimensions" id="new_dimension"
                                         length="<?= get_maxLength('dimensions','dimensions') ?>"
                                         value="<?= isset($_POST['new_dimension']) ? $_POST['new_dimension'] : null ?>">
                                     <label for="new_dimension">Add dimension</label>
@@ -177,18 +177,12 @@ $sort = sorter('data','id_dimensions');
                 <div class="col s12 m10 offset-m1">
 
                     <div class="card">
+                        <span class="card-title blue-text accent-3" style="padding: 10px">All materials</span>
+
+                        <div class="divider"></div><br>
 
                         <div class="row">
-
-                            <div class="col s12 ">
-                                <ul class="tabs">
-                                    <li class="tab col s6"><a href="#materials">Materials</a></li>
-                                    <li class="tab col s6"><a href="#dimensions">Dimensions</a></li>
-                                </ul>
-                            </div>
-
-
-                            <div id="materials" class="col s10 offset-s1">
+                            <div class="col s10 offset-s1">
                                 <table class="responsive-table centered highlight">
 
                                     <thead>
@@ -222,6 +216,7 @@ $sort = sorter('data','id_dimensions');
                                         </th>
                                         <th><span class="hide">Modify</span></th>
                                         <th><span class="hide">Delete</span></th>
+                                        <th><span class="hide">Delete dimension</span></th>
                                     </tr>
                                     </thead>
 
@@ -254,6 +249,20 @@ $sort = sorter('data','id_dimensions');
                                                         <i class="mdi-content-remove"></i>
                                                     </button>
                                                 </td>
+                                                <td>
+                                                    <a href="#" class="dropdown-button btn-flat" data-activates="table-dropdown-<?= $material['id'] ?>">
+                                                        <i class="mdi-navigation-arrow-drop-down"></i>
+                                                    </a>
+
+                                                    <ul id="table-dropdown-<?= $material['id'] ?>" class="dropdown-content table-dropdown">
+                                                        <li>
+                                                            <button type="submit" name="drop" onclick="prom"
+                                                                    class="btn-flat waves-effect waves-red">
+                                                                Delete dimension
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         </form>
                                     <?php endforeach ?>
@@ -262,39 +271,6 @@ $sort = sorter('data','id_dimensions');
                                 </table>
                             </div>
 
-
-                            <div id="dimensions" class=" col s6 offset-s3">
-                                <table class="responsive-table centered highlight">
-
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <a <?= sorter_activator('dimensions')?> href="material.php?s=dimensions">Dimensions</a>
-                                        </th>
-                                        <th><span class="hide">Delete</span></th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    <?php
-                                    $dimensions = find_all('dimensions','dimensions');
-                                    foreach($dimensions as $dimension) :
-                                    ?>
-                                        <form action="material.php" method="post" role="form">
-                                            <tr>
-                                                <td><?= $dimension['dimensions'] ?></td>
-                                                <td>
-                                                    <input type="hidden" name="id" value="<?= $dimension['id'] ?>">
-                                                    <button type="submit" name="drop_dimension" style="margin-left: 10px"
-                                                            class="btn-floating  red accent-4 waves-effect waves-light">
-                                                        <i class="mdi-content-remove"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </form>
-                                    <?php endforeach ?>
-                                    </tbody>
-                            </div>
 
                         </div>
 

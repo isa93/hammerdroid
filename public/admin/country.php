@@ -3,25 +3,25 @@ require_once "../../includes/initialize.php";
 check_login();
 
 if(isset($_POST['load'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = load_country();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
 if(isset($_POST['add'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = add_country();
     array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
 }
 
 if(isset($_POST['modify'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = modify_country();
-    array_shift($check) === FALSE ? $message = array_shift($check) : null;
+    array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
 }
 
 if(isset($_POST['delete'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = delete_country();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }

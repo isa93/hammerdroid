@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Language" content="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="private">
     <meta name="author" content="Tóth Isaszegi Arnold">
 
     <link rel="apple-touch-icon" sizes="57x57" href="../images/apple-touch-icon-57x57.png">

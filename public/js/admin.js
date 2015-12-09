@@ -95,7 +95,9 @@ $("input[type='number']").keydown(function (e) {
 
 });
 
-
+$("button[name='delete'],button[name='drop']").on('click',function(){
+    return confirm("Are you sure?");
+});
 
 /* ___________________________________________________________*/
 

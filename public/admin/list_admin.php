@@ -1,7 +1,7 @@
 <?php
 require_once "../../includes/initialize.php";
 check_login();
-
+check_superuser();
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
 <?php render('admin_nav','list_admin'); ?>

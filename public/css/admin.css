@@ -253,3 +253,20 @@ table thead th{
 table tbody td{
     min-height: 51px !important;
 }
+
+.dropdown-content.table-dropdown{
+    height: 50px !important;
+    width: 150px !important;
+}
+
+.dropdown-content.table-dropdown button{
+    width: 100%;
+    line-height: 25px;
+    height: 50px;
+    background: transparent;
+    transition: .6s ease background;
+}
+.dropdown-content.table-dropdown button:hover{
+    background: #d40001;
+    color: #fff;
+}

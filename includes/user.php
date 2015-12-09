@@ -45,151 +45,141 @@ function authenticate($user, $password)
 function add_user()
 {
     global $WORLD_COUNTRIES;
-    array_filter($_POST, 'escape_value');
+    $_POST = array_filter($_POST, 'clean');
 
     isset($_FILES['image']) ? $image = $_FILES['image'] : $image = "";
     $image_check = save_image($image);
 
-    $first_name = filter_input(INPUT_POST, 'first_name');
-    $last_name = filter_input(INPUT_POST, 'last_name');
-    $country = filter_input(INPUT_POST, 'country');
-    $year = filter_input(INPUT_POST, 'year');
-    $month = filter_input(INPUT_POST, 'month');
-    $day = filter_input(INPUT_POST, 'day');
-    $username = filter_input(INPUT_POST, 'username');
-    $email = filter_input(INPUT_POST, 'email');
-    $password = filter_input(INPUT_POST, 'password');
-    $re_password = filter_input(INPUT_POST, 're_password');
+    foreach ($_POST as $var => $value)
+        $$var = $value;
 
-    $message = "";
-    empty($first_name) ? $message .= "Fill in the first name field!\n" : null;
-    empty($last_name) ? $message .= "Fill in the last name field!\n" : null;
-    empty($country) ? $message .= "Select a country!\n" : null;
-    !empty($country) && !in_array(html_entity_decode($country),$WORLD_COUNTRIES) ? $message .= "Wrong country selected!\n" : null;
-    $country = htmlentities($country,ENT_QUOTES);
-    empty($year) ? $message .= "Select birth year!\n" : null;
-    !empty($year) && $year > date('Y') && $year < date('Y') - 100 ? $message .= "Wrong year selected!\n" : null;
-    empty($month) ? $message .= "Select a birth month!\n" : null;
-    !empty($month) && $month < 1 && $month > 12 ? $message .= "Wrong month selected!\n" : null;
-    empty($day) ? $message .= "Select a birth day!\n" : null;
-    !empty($day) && $day < 1 && $day > 31 ? $message .= "Wrong day selected!\n" : null;
-    !check_username_availability($username) ? $message .= "Username already taken!\n" : null;
-    empty($email) ? $message.= "Fill in the e-mail field!\n" : null;
-    !empty($email) && !check_mail($email) ? $message .= "Not a valid email address!\n" : null;
-    empty($password) || empty($re_password) ? $message .= "Fill in the password fields!\n" : null;
-    !empty($password) && !empty($re_password) && $password !== $re_password ? $message .= "Incorrect password combination!\n" : null;
+    if(isset($first_name) && isset($last_name) && isset($country) && isset($year) && isset($month) && isset($day) && isset($username) && isset($email) && isset($password) && isset($re_password)){
+        $message = "";
+
+        empty($first_name) ? $message .= "Fill in the first name field!\n" : null;
+        empty($last_name) ? $message .= "Fill in the last name field!\n" : null;
+        empty($country) ? $message .= "Select a country!\n" : null;
+        !empty($country) && !in_array(html_entity_decode($country),$WORLD_COUNTRIES) ? $message .= "Wrong country selected!\n" : null;
+        $country = htmlentities($country,ENT_QUOTES);
+        empty($year) ? $message .= "Select birth year!\n" : null;
+        !empty($year) && $year > date('Y') && $year < date('Y') - 100 ? $message .= "Wrong year selected!\n" : null;
+        empty($month) ? $message .= "Select a birth month!\n" : null;
+        !empty($month) && $month < 1 && $month > 12 ? $message .= "Wrong month selected!\n" : null;
+        empty($day) ? $message .= "Select a birth day!\n" : null;
+        !empty($day) && $day < 1 && $day > 31 ? $message .= "Wrong day selected!\n" : null;
+        !check_username_availability($username) ? $message .= "Username already taken!\n" : null;
+        empty($email) ? $message.= "Fill in the e-mail field!\n" : null;
+        !empty($email) && !check_mail($email) ? $message .= "Not a valid email address!\n" : null;
+        empty($password) || empty($re_password) ? $message .= "Fill in the password fields!\n" : null;
+        !empty($password) && !empty($re_password) && $password !== $re_password ? $message .= "Incorrect password combination!\n" : null;
 
 
-    if (empty($message)) {
-        $sql = "INSERT INTO users (username, email, password, first_name, last_name, country, birth_date, image, created_at) ";
-        $sql .= "VALUES (";
-        empty($username) ? $sql .= "NULL, " : $sql .= "'{$username}', ";
-        $sql .= "'{$email}', ";
-        $sql .= "'".hash_password($password)."', ";
-        $sql .= "'{$first_name}', ";
-        $sql .= "'{$last_name}', ";
-        $sql .= "'{$country}', ";
-        $sql .= "'".make_date($year,$month,$day)."', ";
-        is_array($image_check) && array_shift($image_check)===true ? $sql.= "'".array_shift($image_check)."', " : $sql .= "NULL, ";
-        $sql .= "now() )";
+        if (empty($message)) {
+            $sql = "INSERT INTO users (username, email, password, first_name, last_name, country, birth_date, image, created_at) ";
+            $sql .= "VALUES (";
+            empty($username) ? $sql .= "NULL, " : $sql .= "'{$username}', ";
+            $sql .= "'{$email}', ";
+            $sql .= "'".hash_password($password)."', ";
+            $sql .= "'{$first_name}', ";
+            $sql .= "'{$last_name}', ";
+            $sql .= "'{$country}', ";
+            $sql .= "'".make_date($year,$month,$day)."', ";
+            is_array($image_check) && array_shift($image_check)===true ? $sql.= "'".array_shift($image_check)."', " : $sql .= "NULL, ";
+            $sql .= "now() )";
 
-        query($sql);
-        return affected_rows() ? [true] : [false,"Database insert failed!"];
-    } else return [false, $message];
-
+            query($sql);
+            return affected_rows() ? [true] : [false,"Database insert failed!"];
+        } else return [false, $message];
+    } else return [false,"Wrong parameters!"];
 }
 
 function modify_user(){
 
     global $WORLD_COUNTRIES;
-    array_filter($_POST, 'escape_value');
+    $_POST = array_filter($_POST, 'clean');
 
     isset($_FILES['image']) ? $image = $_FILES['image'] : $image = "";
 
-    $id = filter_input(INPUT_POST,'id');
-    $first_name = filter_input(INPUT_POST, 'first_name');
-    $last_name = filter_input(INPUT_POST, 'last_name');
-    $country = filter_input(INPUT_POST, 'country');
-    $year = filter_input(INPUT_POST, 'year');
-    $month = filter_input(INPUT_POST, 'month');
-    $day = filter_input(INPUT_POST, 'day');
-    $username = filter_input(INPUT_POST, 'username');
-    $email = filter_input(INPUT_POST, 'email');
-    $password = filter_input(INPUT_POST, 'password');
-    $new_password = filter_input(INPUT_POST, 'new_password');
-    $re_new_password = filter_input(INPUT_POST,'re_new_password');
+    foreach ($_POST as $var => $value)
+        $$var = $value;
 
-    $message = "";
-    empty($id) ? $message .= "Id can't be empty!" : null;
-    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
-    ($user = find_by_id('users',$id)) == FALSE ? $message .= "Wrong user!\n" : null;
-    empty($first_name) ? $message .= "Fill in the first name field!\n" : null;
-    empty($last_name) ? $message .= "Fill in the last name field!\n" : null;
-    empty($country) ? $message .= "Select a country!\n" : null;
-    !empty($country) && !in_array(html_entity_decode($country),$WORLD_COUNTRIES) ? $message .= "Wrong country selected!\n" : null;
-    $country = htmlentities($country,ENT_QUOTES);
-    empty($year) ? $message .= "Select birth year!\n" : null;
-    !empty($year) && $year > date('Y') && $year < date('Y') - 100 ? $message .= "Wrong year selected!\n" : null;
-    empty($month) ? $message .= "Select a birth month!\n" : null;
-    !empty($month) && $month < 1 && $month > 12 ? $message .= "Wrong month selected!\n" : null;
-    empty($day) ? $message .= "Select a birth day!\n" : null;
-    !empty($day) && $day < 1 && $day > 31 ? $message .= "Wrong day selected!\n" : null;
-    !check_username($id,$username) ? !check_username_availability($username) ? $message .= "Username already taken!\n" : null : null;
-    empty($email) ? $message.= "Fill in the e-mail field!\n" : null;
-    !empty($email) && !check_mail($email) ? $message .= "Not a valid email address!\n" : null;
-    empty($password) ? $message .= "Fill in the password field!\n" : null;
-    !empty($password)  && $new_password !== $re_new_password ? $message .= "Incorrect password combination!\n" : null;
+    if(isset($id) && isset($first_name) && isset($last_name) && isset($country) && isset($year) && isset($month) && isset($day) && isset($username) && isset($email) && isset($password) && isset($new_password) && isset($re_new_password)) {
+        $message = "";
 
-    if(empty($message)){
-        $auth = authenticate($email,$password);
-        if(array_shift($auth)===TRUE){
+        empty($id) ? $message .= "Id can't be empty!" : null;
+        !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
+        ($user = find_by_id('users',$id)) == FALSE ? $message .= "Wrong user!\n" : null;
+        empty($first_name) ? $message .= "Fill in the first name field!\n" : null;
+        empty($last_name) ? $message .= "Fill in the last name field!\n" : null;
+        empty($country) ? $message .= "Select a country!\n" : null;
+        !empty($country) && !in_array(html_entity_decode($country),$WORLD_COUNTRIES) ? $message .= "Wrong country selected!\n" : null;
+        $country = htmlentities($country,ENT_QUOTES);
+        empty($year) ? $message .= "Select birth year!\n" : null;
+        !empty($year) && $year > date('Y') && $year < date('Y') - 100 ? $message .= "Wrong year selected!\n" : null;
+        empty($month) ? $message .= "Select a birth month!\n" : null;
+        !empty($month) && $month < 1 && $month > 12 ? $message .= "Wrong month selected!\n" : null;
+        empty($day) ? $message .= "Select a birth day!\n" : null;
+        !empty($day) && $day < 1 && $day > 31 ? $message .= "Wrong day selected!\n" : null;
+        !check_username($id,$username) ? !check_username_availability($username) ? $message .= "Username already taken!\n" : null : null;
+        empty($email) ? $message.= "Fill in the e-mail field!\n" : null;
+        !empty($email) && !check_mail($email) ? $message .= "Not a valid email address!\n" : null;
+        empty($password) ? $message .= "Fill in the password field!\n" : null;
+        !empty($password)  && $new_password !== $re_new_password ? $message .= "Incorrect password combination!\n" : null;
+
+        if(empty($message)){
+            $auth = authenticate($email,$password);
+            if(array_shift($auth)===TRUE){
 //            dump($image);exit;
-            ($old_image = get_user_image($auth[0])) != 'default.jpg' ?
-                $new_image = update_image($old_image,$image) :
-                $new_image = save_image($image);
-            if(!is_string($new_image)){
+                ($old_image = get_user_image($auth[0])) != 'default.jpg' ?
+                    $new_image = update_image($old_image,$image) :
+                    $new_image = save_image($image);
+                if(!is_string($new_image)){
 
-                $sql = "UPDATE users SET ";
-                array_shift($new_image)==TRUE ? $sql .= "image='".array_shift($new_image)."', " : null;
-                $sql .= "first_name='{$first_name}', ";
-                $sql .= "last_name='{$last_name}', ";
-                $sql .= "country='{$country}', ";
-                $sql .= "birth_date='".make_date($year,$month,$day)."', ";
-                !empty($username) ? $sql .= "username='{$username}', " : null;
-                $sql .= "email='{$email}', ";
-                !empty($new_password) ? $sql .= "password='".hash_password($new_password)."', " : null;
-                $sql .= "updated_at=now() ";
-                $sql .= "WHERE id='{$auth[0]}'";
+                    $sql = "UPDATE users SET ";
+                    array_shift($new_image)==TRUE ? $sql .= "image='".array_shift($new_image)."', " : null;
+                    $sql .= "first_name='{$first_name}', ";
+                    $sql .= "last_name='{$last_name}', ";
+                    $sql .= "country='{$country}', ";
+                    $sql .= "birth_date='".make_date($year,$month,$day)."', ";
+                    !empty($username) ? $sql .= "username='{$username}', " : null;
+                    $sql .= "email='{$email}', ";
+                    !empty($new_password) ? $sql .= "password='".hash_password($new_password)."', " : null;
+                    $sql .= "updated_at=now() ";
+                    $sql .= "WHERE id='{$auth[0]}'";
 
-                query($sql);
-                return affected_rows() ? [true] : [false,"Database update failed!"];
-            } else return [false,$new_image];
-        } else return [false,array_shift($auth)];
-    } else return [false, $message];
-
+                    query($sql);
+                    return affected_rows() ? [true] : [false,"Database update failed!"];
+                } else return [false,$new_image];
+            } else return [false,array_shift($auth)];
+        } else return [false, $message];
+    } else return [false,"Wrong parameters!"];
 }
 
 function delete_user(){
-    array_filter($_POST, 'escape_value');
+    $_POST = array_filter($_POST, 'clean');
 
-    $id = filter_input(INPUT_POST,'id');
+    foreach ($_POST as $var => $value)
+        $$var = $value;
 
-    $message = "";
-    empty($id) ? $message = "Id can't be empty!\n" : null;
-    $id==1 ? $message .= "Can't delete superuser account!\n" : null;
-    !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
+    if(isset($id)){
+        $message = "";
 
-    if(empty($message)){
-        $image_check = delete_image(get_user_image($id));
-        if($image_check == true){
-            $sql = "DELETE from users ";
-            $sql .= "WHERE id='{$id}' ";
-            $sql .= "LIMIT 1";
+        empty($id) ? $message = "Id can't be empty!\n" : null;
+        $id==1 ? $message .= "Can't delete superuser account!\n" : null;
+        !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
 
-            query($sql);
-            return affected_rows() ? [true] : [false, "Database delete failed!"];
-        } else return [false,$image_check];
-    } else return [false,$message];
+        if(empty($message)){
+            $image_check = delete_image(get_user_image($id));
+            if($image_check == true){
+                $sql = "DELETE from users ";
+                $sql .= "WHERE id='{$id}' ";
+                $sql .= "LIMIT 1";
+
+                query($sql);
+                return affected_rows() ? [true] : [false, "Database delete failed!"];
+            } else return [false,$image_check];
+        } else return [false,$message];
+    } else return [false,"Wrong parameters!"];
 }
 function check_superuser(){
     $_SESSION['user_id']==1 ? null : redirect_to('index.php');

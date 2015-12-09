@@ -3,25 +3,25 @@ require_once "../../includes/initialize.php";
 check_login();
 
 if(isset($_POST['load'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = load_building();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
 
 if(isset($_POST['add'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = add_building();
     array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
 }
 
 if(isset($_POST['modify'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = modify_building();
-    array_shift($check) === FALSE ? $message = array_shift($check) : null;
+    array_shift($check) === FALSE ? $message = array_shift($check) : $_POST = [];
 }
 
 if(isset($_POST['delete'])){
-    array_filter($_POST, 'trim_value');
+    $_POST = array_filter($_POST, 'trim_value');
     $check = delete_building();
     array_shift($check) === FALSE ? $message = array_shift($check) : null;
 }
@@ -91,7 +91,7 @@ $sort = sorter('buildings','name_srb');
                                 <input type="text" name="name_eng" id="name_eng"
                                        length="<?= get_maxLength('buildings','name_eng') ?>"
                                        value="<?= isset($_POST['name_eng']) ? $_POST['name_eng'] : null ?>">
-                                <label for="name_eng">Name</label>
+                                <label for="name_eng">Name (English)</label>
                             </div>
                         </div>
 

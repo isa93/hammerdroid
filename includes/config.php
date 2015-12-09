@@ -1,9 +1,9 @@
 <?php
 
-defined("DB_SERVER") ? null : define("DB_SERVER", "localhost");
-defined("DB_USER") ? null : define("DB_USER", "root");
-defined("DB_PASSWORD") ? null : define("DB_PASSWORD", "");
-defined("DB_NAME") ? null : define("DB_NAME", "hammerdroid");
+defined("DB_SERVER") ? null : define("DB_SERVER", "localhost"); // fdb12.awardspace.net
+defined("DB_USER") ? null : define("DB_USER", "root"); // 1988902_hamd
+defined("DB_PASSWORD") ? null : define("DB_PASSWORD", ""); // WeAreTheDroid666
+defined("DB_NAME") ? null : define("DB_NAME", "hammerdroid"); // 1988902_hamd
 
 defined("SESSION_TIME") ? null : define("SESSION_TIME", 30); // in minutes
 

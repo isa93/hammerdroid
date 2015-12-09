@@ -6,6 +6,8 @@ defined('SITE_ROOT') ? null : define('SITE_ROOT', DS . 'wamp' . DS . 'www' . DS 
 
 defined('LIB_PATH') ? null : define('LIB_PATH', SITE_ROOT . DS . 'includes');
 
+defined('DOMAIN') ? null : define('DOMAIN','public'); // hammerdroid.com
+
 require_once LIB_PATH . DS . "config.php";
 
 require_once LIB_PATH . DS . "functions.php";

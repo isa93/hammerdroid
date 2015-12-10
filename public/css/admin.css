@@ -193,6 +193,10 @@ nav #profile-options{
     }
 }
 /*______________________________ DASHBOARD___________________________________________________________________________*/
+.slider{
+    margin-top: 2em;
+}
+
 .slider .indicators .indicator-item.active{
     background-color: #2195f2;
 }

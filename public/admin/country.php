@@ -148,36 +148,44 @@ $sort = sorter('countries','name_srb');
                                     $countries = find_all('countries', $sort);
                                     foreach ($countries as $country):
                                         ?>
-                                        <form action="country.php" method="post" role="form">
+
                                             <tr>
+
                                                 <td><?= $country['name_srb'] ?></td>
                                                 <td><?= $country['name_hun'] ?></td>
                                                 <td><?= $country['name_eng'] ?></td>
                                                 <td>
-                                                    <input type="hidden" name="id" value="<?= $country['id'] ?>">
-                                                    <button type="submit" name="load" style="margin-left: 10px"
-                                                            class="btn-floating  blue waves-effect waves-light">
-                                                        <i class="material-icons">loop</i>
-                                                    </button>
+                                                    <form action="country.php" method="post" role="form">
+                                                        <input type="hidden" name="id" value="<?= $country['id'] ?>">
+                                                        <button type="submit" name="load" style="margin-left: 10px"
+                                                                class="btn-floating  blue waves-effect waves-light">
+                                                            <i class="material-icons">loop</i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="delete" style="margin-left: 10px"
-                                                            class="btn-floating  red accent-4 waves-effect waves-light">
-                                                        <i class="mdi-content-remove"></i>
-                                                    </button>
+                                                    <form action="country.php" method="post" role="form">
+                                                        <input type="hidden" name="id" value="<?= $country['id'] ?>">
+                                                        <button type="submit" name="delete" style="margin-left: 10px"
+                                                                class="btn-floating  red accent-4 waves-effect waves-light">
+                                                            <i class="mdi-content-remove"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
+
                                             </tr>
-                                        </form>
+
                                     <?php endforeach ?>
                                     </tbody>
 
                                 </table>
-                            </div>
-                        </div>
+                            </div> <!-- /col -->
+                        </div> <!-- /row -->
 
-                    </div>
+                    </div><!-- /card -->
 
                 </div>
+                <!-- /LIST GROUPS -->
 
             </div>
 

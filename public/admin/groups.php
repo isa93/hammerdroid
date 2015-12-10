@@ -149,36 +149,44 @@ $sort = sorter('groups','name_srb');
                                     $groups = find_all('groups', $sort);
                                     foreach ($groups as $group):
                                     ?>
-                                        <form action="groups.php" method="post" role="form">
+
                                             <tr>
+
                                                 <td><?= $group['name_srb'] ?></td>
                                                 <td><?= $group['name_hun'] ?></td>
                                                 <td><?= $group['name_eng'] ?></td>
                                                 <td>
-                                                    <input type="hidden" name="id" value="<?= $group['id'] ?>">
-                                                    <button type="submit" name="load" style="margin-left: 10px"
-                                                            class="btn-floating  blue waves-effect waves-light">
-                                                        <i class="material-icons">loop</i>
-                                                    </button>
+                                                    <form action="groups.php" method="post" role="form">
+                                                        <input type="hidden" name="id" value="<?= $group['id'] ?>">
+                                                        <button type="submit" name="load" style="margin-left: 10px"
+                                                                class="btn-floating  blue waves-effect waves-light">
+                                                            <i class="material-icons">loop</i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="delete" style="margin-left: 10px"
-                                                            class="btn-floating  red accent-4 waves-effect waves-light">
-                                                        <i class="mdi-content-remove"></i>
-                                                    </button>
+                                                    <form action="groups.php" method="post" role="form">
+                                                        <input type="hidden" name="id" value="<?= $group['id'] ?>">
+                                                        <button type="submit" name="delete" style="margin-left: 10px"
+                                                                class="btn-floating  red accent-4 waves-effect waves-light">
+                                                            <i class="mdi-content-remove"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
+
                                             </tr>
-                                        </form>
+
                                     <?php endforeach ?>
                                     </tbody>
 
                                 </table>
-                            </div>
-                        </div>
+                            </div> <!-- /col -->
+                        </div> <!-- /row -->
 
-                    </div>
+                    </div><!-- /card -->
 
                 </div>
+                <!-- /LIST GROUPS -->
 
             </div>
         </div>

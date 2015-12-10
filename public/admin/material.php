@@ -225,63 +225,68 @@ $sort = sorter('data','id_dimensions');
                                     $materials = find_all('data', $sort);
                                     foreach ($materials as $material):
                                     ?>
-                                        <form action="material.php" method="post" role="form">
-                                            <tr>
-                                                <td><?php $dimension = find_by_id('dimensions',$material['id_dimensions']);echo $dimension['dimensions'];?></td>
-                                                <td><?= $material['S'] ?></td>
-                                                <td><?= $material['A'] ?></td>
-                                                <td><?= $material['Wx'] ?></td>
-                                                <td><?= $material['Wy'] ?></td>
-                                                <td><?= $material['Ix'] ?></td>
-                                                <td><?= $material['Iy'] ?></td>
-                                                <td><?= $material['Jx'] ?></td>
-                                                <td><?= $material['Jy'] ?></td>
-                                                <td>
+
+                                        <tr>
+
+                                            <td><?php $dimension = find_by_id('dimensions',$material['id_dimensions']);echo $dimension['dimensions'];?></td>
+                                            <td><?= $material['S'] ?></td>
+                                            <td><?= $material['A'] ?></td>
+                                            <td><?= $material['Wx'] ?></td>
+                                            <td><?= $material['Wy'] ?></td>
+                                            <td><?= $material['Ix'] ?></td>
+                                            <td><?= $material['Iy'] ?></td>
+                                            <td><?= $material['Jx'] ?></td>
+                                            <td><?= $material['Jy'] ?></td>
+                                            <td>
+                                                <form action="material.php" method="post" role="form">
                                                     <input type="hidden" name="id" value="<?= $material['id'] ?>">
                                                     <button type="submit" name="load" style="margin-left: 10px"
                                                             class="btn-floating  blue waves-effect waves-light">
                                                         <i class="material-icons">loop</i>
                                                     </button>
-                                                </td>
-                                                <td>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="material.php" method="post" role="form">
+                                                    <input type="hidden" name="id" value="<?= $material['id'] ?>">
                                                     <button type="submit" name="delete" style="margin-left: 10px"
                                                             class="btn-floating  red accent-4 waves-effect waves-light">
                                                         <i class="mdi-content-remove"></i>
                                                     </button>
-                                                </td>
-                                                <td>
-                                                    <a href="#" class="dropdown-button btn-flat" data-activates="table-dropdown-<?= $material['id'] ?>">
-                                                        <i class="mdi-navigation-arrow-drop-down"></i>
-                                                    </a>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="dropdown-button btn-flat" data-activates="table-dropdown-<?= $material['id'] ?>">
+                                                    <i class="mdi-navigation-arrow-drop-down"></i>
+                                                </a>
 
-                                                    <ul id="table-dropdown-<?= $material['id'] ?>" class="dropdown-content table-dropdown">
-                                                        <li>
-                                                            <button type="submit" name="drop" onclick="prom"
-                                                                    class="btn-flat waves-effect waves-red">
-                                                                Delete dimension
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </form>
+                                                <ul id="table-dropdown-<?= $material['id'] ?>" class="dropdown-content table-dropdown">
+                                                    <li>
+                                                        <button type="submit" name="drop"
+                                                                class="btn-flat waves-effect waves-red">
+                                                            Delete dimension
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </td>
+
+                                        </tr>
+
                                     <?php endforeach ?>
                                     </tbody>
 
                                 </table>
-                            </div>
+                            </div> <!-- /col -->
+                        </div> <!-- /row -->
 
-
-                        </div>
-
-                    </div>
+                    </div> <!-- /card -->
 
                 </div>
+                <!-- /LIST MATERIAL -->
 
             </div>
 
-        </div>
-        <!-- /.section -->
+        </div><!-- /.section -->
     </section>
 
 <?php require_once "../layouts/admin_footer.php"; ?>

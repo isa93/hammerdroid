@@ -173,37 +173,45 @@ $sort = sorter('buildings','name_srb');
                                 $buildings = find_all('buildings', $sort);
                                 foreach ($buildings as $building):
                                 ?>
-                                    <form action="buildings.php" method="post" role="form">
-                                        <tr>
-                                            <td><?= $building['name_srb'] ?></td>
-                                            <td><?= $building['name_hun'] ?></td>
-                                            <td><?= $building['name_eng'] ?></td>
-                                            <td><?php $group = find_by_id('groups',$building['id_groups']);echo $group['name_srb']?></td>
-                                            <td>
+
+                                    <tr>
+
+                                        <td><?= $building['name_srb'] ?></td>
+                                        <td><?= $building['name_hun'] ?></td>
+                                        <td><?= $building['name_eng'] ?></td>
+                                        <td><?php $group = find_by_id('groups',$building['id_groups']);echo $group['name_srb']?></td>
+                                        <td>
+                                            <form action="buildings.php" method="post" role="form">
                                                 <input type="hidden" name="id" value="<?= $building['id'] ?>">
                                                 <button type="submit" name="load" style="margin-left: 10px"
                                                         class="btn-floating  blue waves-effect waves-light">
                                                     <i class="material-icons">loop</i>
                                                 </button>
-                                            </td>
-                                            <td>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="buildings.php" method="post" role="form">
+                                                <input type="hidden" name="id" value="<?= $building['id'] ?>">
                                                 <button type="submit" name="delete" style="margin-left: 10px"
                                                         class="btn-floating  red accent-4 waves-effect waves-light">
                                                     <i class="mdi-content-remove"></i>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                    </form>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+
                                 <?php endforeach ?>
                                 </tbody>
 
                             </table>
-                        </div>
-                    </div>
+                        </div> <!-- /col -->
+                    </div> <!-- /row -->
 
-                </div>
+                </div> <!-- /card -->
 
             </div>
+            <!-- /LIST BUILDINGS -->
 
         </div>
     </div>

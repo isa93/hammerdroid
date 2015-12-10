@@ -190,8 +190,9 @@ $sort = sorter('cities','name_srb');
                                     $cities = find_all('cities', $sort);
                                     foreach ($cities as $city):
                                     ?>
-                                        <form action="city.php" method="post" role="form">
+
                                             <tr>
+
                                                 <td><?= $city['name_srb'] ?></td>
                                                 <td><?= $city['name_hun'] ?></td>
                                                 <td><?= $city['name_eng'] ?></td>
@@ -199,30 +200,37 @@ $sort = sorter('cities','name_srb');
                                                 <td><?= $city['altitude'] ?> m</td>
                                                 <td><?= $city['wind_force'] ?> <sup>m</sup><strong>&sol;</strong><sub>s</sub></td>
                                                 <td>
-                                                    <input type="hidden" name="id" value="<?= $city['id'] ?>">
-                                                    <button type="submit" name="load" style="margin-left: 10px"
-                                                            class="btn-floating  blue waves-effect waves-light">
-                                                        <i class="material-icons">loop</i>
-                                                    </button>
+                                                    <form action="city.php" method="post" role="form">
+                                                        <input type="hidden" name="id" value="<?= $city['id'] ?>">
+                                                        <button type="submit" name="load" style="margin-left: 10px"
+                                                                class="btn-floating  blue waves-effect waves-light">
+                                                            <i class="material-icons">loop</i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="delete" style="margin-left: 10px"
-                                                            class="btn-floating  red accent-4 waves-effect waves-light">
-                                                        <i class="mdi-content-remove"></i>
-                                                    </button>
+                                                    <form action="city.php" method="post" role="form">
+                                                        <input type="hidden" name="id" value="<?= $city['id'] ?>">
+                                                        <button type="submit" name="delete" style="margin-left: 10px"
+                                                                class="btn-floating  red accent-4 waves-effect waves-light">
+                                                            <i class="mdi-content-remove"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
+
                                             </tr>
-                                        </form>
+
                                     <?php endforeach ?>
                                     </tbody>
 
                                 </table>
-                            </div>
-                        </div>
+                            </div> <!-- /col -->
+                        </div> <!-- /row -->
 
-                    </div>
+                    </div><!-- /card -->
 
                 </div>
+                <!-- /LIST GROUPS -->
 
             </div>
 

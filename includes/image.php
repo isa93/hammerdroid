@@ -41,7 +41,7 @@ function save_image($file)
         if (exif_imagetype($temp_path) == IMAGETYPE_JPEG || exif_imagetype($temp_path) == IMAGETYPE_PNG) {
             $extension = substr($filename, strrpos($filename, '.'), strlen($filename));
             $filename = date('Ymd-His') . $extension;
-            $target_path = SITE_ROOT . DS . 'public' . DS . 'images' . DS . 'user' . DS . $filename;
+            $target_path = SITE_ROOT . DS . DOMAIN . DS . 'images' . DS . 'user' . DS . $filename;
 
             if (file_exists($target_path)) {
                 return "The file {$filename} already exists!";

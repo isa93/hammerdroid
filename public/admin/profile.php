@@ -29,7 +29,7 @@ check_login();
             <div class="col s12 m5">
                 <div class="card" style="overflow: visible">
                     <div class="card-image">
-                        <img class="materialboxed" width="200" src="../images/user/<?=get_user_image($user['id'])?>" alt="User profile image">
+                        <img class="materialboxed" width="200" src="../images/user/<?=get_image('users',$user['id'])?>" alt="User profile image">
                     </div>
                 </div>
             </div>

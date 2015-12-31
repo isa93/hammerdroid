@@ -22,6 +22,8 @@ require_once LIB_PATH . DS . "render.php";
 
 require_once LIB_PATH . DS . "user.php";
 
+require_once LIB_PATH . DS . "client.php";
+
 require_once LIB_PATH . DS . "image.php";
 
 require_once LIB_PATH . DS . "region.php";

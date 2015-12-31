@@ -86,19 +86,19 @@
                 <li>
 
                     <a class="collapsible-header white-text <?= ($page == 'list_user') || ($page == 'add_user') || ($page == 'delete_user') ? 'active' : null ?>">
-                        <i class="material-icons">perm_identity</i>User<i class="mdi-navigation-arrow-drop-down right"></i>
+                        <i class="fa fa-user"></i>Client<i class="mdi-navigation-arrow-drop-down right"></i>
                     </a>
 
                     <div class="collapsible-body blue accent-2">
                         <ul>
-                            <li class="<?= $page == 'list_user' ? 'active' : null ?>">
-                                <a href="#!" class="white-text">List</a>
+                            <li class="<?= $page == 'list_client' ? 'active' : null ?>">
+                                <a href="list_client.php" class="white-text">List</a>
                             </li>
-                            <li class="<?= $page == 'add_user' ? 'active' : null ?>">
-                                <a href="#!" class="white-text">Add</a>
+                            <li class="<?= $page == 'add_client' ? 'active' : null ?>">
+                                <a href="add_client.php" class="white-text">Add</a>
                             </li>
-                            <li class="<?= $page == 'delete_user' ? 'active' : null ?>">
-                                <a href="#!" class="white-text">Delete</a>
+                            <li class="<?= $page == 'delete_client' ? 'active' : null ?>">
+                                <a href="delete_client.php" class="white-text">Delete</a>
                             </li>
                         </ul>
                     </div>

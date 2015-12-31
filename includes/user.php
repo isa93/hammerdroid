@@ -169,7 +169,7 @@ function delete_user(){
         !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
 
         if(empty($message)){
-            $image_check = delete_image(get_user_image($id));
+            $image_check = delete_image(get_image('users',$id));
             if($image_check == true){
                 $sql = "DELETE from users ";
                 $sql .= "WHERE id='{$id}' ";
@@ -214,15 +214,15 @@ function generate_salt($string)
     return hash('sha256', SYSTEM_SALT . $string_l . SYSTEM_SALT . $string_r . SYSTEM_SALT);
 }
 
-function get_user_image($id)
-{
-    $sql = "SELECT image FROM users WHERE id='{$id}'";
-    $result = find_by_sql($sql);
-    $result = array_shift($result);
-    if ($result[0] !== null) {
-        return array_shift($result);
-    } else return 'default.jpg';
-}
+//function get_user_image($id)
+//{
+//    $sql = "SELECT image FROM users WHERE id='{$id}'";
+//    $result = find_by_sql($sql);
+//    $result = array_shift($result);
+//    if ($result[0] !== null) {
+//        return array_shift($result);
+//    } else return 'default.jpg';
+//}
 
 function get_user_name($id)
 {

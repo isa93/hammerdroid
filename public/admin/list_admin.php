@@ -25,7 +25,7 @@ check_superuser();
             <?php
             $admins = find_all('users','first_name');
             foreach($admins as $admin):
-               $image = get_user_image($admin['id']);
+               $image = get_image('users',$admin['id']);
             ?>
             <div class="col s12 m10 offset-m1 l6">
                 <div class="card medium">
@@ -63,7 +63,9 @@ check_superuser();
                                     <select id="country<?=$admin['id']?>" disabled>
                                         <?php
                                             foreach($WORLD_COUNTRIES as $country)
-                                            echo htmlentities($country, ENT_QUOTES)==$admin['country'] ? "<option value=\"" .htmlentities($country, ENT_QUOTES).  "\" selected>".htmlentities($country)."</option>\n" : "<option value=\"" .htmlentities($country,ENT_QUOTES)."\">".htmlentities($country)."</option>\n";
+                                            echo htmlentities($country, ENT_QUOTES)==$admin['country'] ?
+                                                "<option value=\"" .htmlentities($country, ENT_QUOTES).  "\" selected>".htmlentities($country)."</option>\n" :
+                                                "<option value=\"" .htmlentities($country,ENT_QUOTES)."\">".htmlentities($country)."</option>\n";
                                         ?>
                                     </select>
                                     <label for="country<?=$admin['id']?>">Country</label>

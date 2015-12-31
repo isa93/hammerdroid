@@ -131,7 +131,7 @@ function add_building(){
     foreach ($_POST as $var => $value)
         $$var = $value;
 
-    if(isset($name_srb) && isset($name_hun) && isset($name_eng) && isset($id_groups)) {
+    if(isset($name_srb) && isset($name_hun) && isset($name_eng)) {
         $message = "";
 
         empty($name_srb) ? $message .= "Fill in the name(Serbian) filed!\n" : null;

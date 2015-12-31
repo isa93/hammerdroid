@@ -2,30 +2,30 @@
 require_once "../../includes/initialize.php";
 check_login();
 
-if (isset($_POST['modify'])) {
+if (isset($_POST['register'])) {
     $_POST = array_filter($_POST, 'trim_value');
-    $check = modify_user();
+    $check = add_client();
     if (array_shift($check) === TRUE) {
-        redirect_to('profile.php');
+        redirect_to('list_client.php');
     } else $message = array_shift($check);
 }
 
 
 ?>
 <?php require_once "../layouts/admin_header.php"; ?>
-<?php render('admin_nav', 'edit_profile'); ?>
+<?php render('admin_nav', 'add_client'); ?>
 
     <section>
         <div class="section">
 
             <div class="divider"></div>
             <div class="row page-title" style="margin: 10px 10px">
-                <div class="col s12 m6 l5">
-                    <a class="breadcrumb" href="profile.php"><i
-                            class="mdi-action-account-box left small" style="line-height: 30px"></i>Profile</a>
-                    <a class="breadcrumb" href="edit_profile.php">&gt; Edit</a>
+                <div class="col s12 m4 l3">
+                    <a class="breadcrumb" href="list_client.php"><i
+                            class="fa fa-user left small"></i>Client</a>
+                    <a class="breadcrumb" href="add_client.php">&gt; Add</a>
                 </div>
-                <div class="col s12 m6 l7">
+                <div class="col s12 m8 l9">
                     <?= isset($message) ? output_message($message) : null; ?>
                 </div>
             </div>
@@ -33,14 +33,14 @@ if (isset($_POST['modify'])) {
 
 
             <div class="row container">
-                <?php $client = find_by_id('users', $_SESSION['user_id']); ?>
-                <form action="edit_profile.php" method="post" enctype="multipart/form-data">
+
+                <form action="add_client.php" method="post" enctype="multipart/form-data">
 
                     <div class="col s12 m5">
                         <div class="card" style="overflow: visible">
                             <div class="card-image">
                                 <img class="preview materialboxed"
-                                     src="../images/user/<?= get_image('users',$client['id']) ?>"
+                                     src="../images/user/default.jpg"
                                      alt="User profile image">
                             </div>
                             <div class="card-action">
@@ -63,23 +63,23 @@ if (isset($_POST['modify'])) {
                                     <div class="input-field">
                                         <input type="text" id="first_name" name="first_name"
                                                length="<?= get_maxLength('users', 'first_name') ?>"
-                                               value="<?= isset($_POST['modify']) ? $_POST['first_name'] : $client['first_name'] ?>">
+                                               value="<?= isset($_POST['register']) ? $_POST['first_name'] : null ?>">
                                         <label for="first_name">First name</label>
                                     </div>
 
                                     <div class="input-field">
                                         <input type="text" id="last_name" name="last_name"
                                                length="<?= get_maxLength('users', 'last_name') ?>"
-                                               value="<?= isset($_POST['modify']) ? $_POST['last_name'] : $client['last_name'] ?>">
+                                               value="<?= isset($_POST['register']) ? $_POST['last_name'] : null ?>">
                                         <label for="last_name">Last name</label>
                                     </div>
 
                                     <div class="input-field country">
-                                        <select id="country" name="country">
-                                            <option value="">Choose</option>
+                                        <select name="country" id="country">
+                                            <option value="" <?= !isset($_POST['register']) ? 'selected' : null; ?>>Choose</option>
                                             <?php
                                             foreach ($WORLD_COUNTRIES as $country)
-                                                echo isset($_POST['country']) && $_POST['country'] == htmlentities($country, ENT_QUOTES) || !isset($_POST['country']) && htmlentities($country, ENT_QUOTES) == $client['country'] ?
+                                                echo isset($_POST['country']) && $_POST['country'] == $country ?
                                                     "<option value=\"" . htmlentities($country, ENT_QUOTES) . "\" selected>" . htmlentities($country) . "</option>\n" :
                                                     "<option value=\"" . htmlentities($country, ENT_QUOTES) . "\">" . htmlentities($country) . "</option>\n";
                                             ?>
@@ -89,13 +89,13 @@ if (isset($_POST['modify'])) {
 
                                     <div class="row">
 
-                                        <?php $birthday = explode("-", $client['birth_date']) ?>
+
                                         <div class="input-field col s4">
                                             <select id="year" name="year">
-                                                <option value="">Choose</option>
+                                                <option value="" <?= !isset($_POST['register']) ? 'selected' : null; ?>>Choose</option>
                                                 <?php
                                                 for ($i = date('Y'); $i >= date('Y') - 100; $i--)
-                                                    echo isset($_POST['year']) && $_POST['year'] == $i || !isset($_POST['year']) && $birthday[0] == $i ?
+                                                    echo isset($_POST['year']) && $_POST['year'] == $i ?
                                                         "<option value=\"{$i}\" selected>{$i}</option>" :
                                                         "<option value=\"{$i}\">{$i}</option>";
                                                 ?>
@@ -104,10 +104,10 @@ if (isset($_POST['modify'])) {
                                         </div>
                                         <div class="input-field col s4">
                                             <select id="month" name="month">
-                                                <option value="">Choose</option>
+                                                <option value="" <?= !isset($_POST['register']) ? 'selected' : null; ?>>Choose</option>
                                                 <?php
                                                 for ($i = 1; $i <= 12; $i++)
-                                                    echo isset($_POST['month']) && $_POST['month'] == $i || !isset($_POST['month']) && $birthday[1] == $i ?
+                                                    echo isset($_POST['month']) && $_POST['month'] == $i ?
                                                         "<option value=\"{$i}\" selected>{$i}</option>" :
                                                         "<option value=\"{$i}\">{$i}</option>";
                                                 ?>
@@ -116,10 +116,10 @@ if (isset($_POST['modify'])) {
                                         </div>
                                         <div class="input-field col s4">
                                             <select id="day" name="day">
-                                                <option value="">Choose</option>
+                                                <option value="" <?= !isset($_POST['register']) ? 'selected' : null; ?>>Choose</option>
                                                 <?php
                                                 for ($i = 1; $i <= 31; $i++)
-                                                    echo isset($_POST['day']) && $_POST['day'] == $i || !isset($_POST['day']) && $birthday[2] == $i ?
+                                                    echo isset($_POST['day']) && $_POST['day'] == $i ?
                                                         "<option value=\"{$i}\" selected>{$i}</option>" :
                                                         "<option value=\"{$i}\">{$i}</option>";
                                                 ?>
@@ -132,14 +132,14 @@ if (isset($_POST['modify'])) {
                                     <div class="input-field">
                                         <input type="text" id="username" name="username"
                                                length="<?= get_maxLength('users', 'username') ?>"
-                                               value="<?= isset($_POST['register']) ? $_POST['username'] : $client['username'] ?>">
+                                               value="<?= isset($_POST['register']) ? $_POST['username'] : null ?>">
                                         <label for="username">Username (optional)</label>
                                     </div>
 
                                     <div class="input-field">
                                         <input type="email" id="email" name="email" class="validate"
                                                length="<?= get_maxLength('users', 'email') ?>"
-                                               value="<?= isset($_POST['register']) ? $_POST['email'] : $client['email'] ?>">
+                                               value="<?= isset($_POST['register']) ? $_POST['email'] : null ?>">
                                         <label for="email">E-mail</label>
                                     </div>
 
@@ -149,19 +149,12 @@ if (isset($_POST['modify'])) {
                                     </div>
 
                                     <div class="input-field">
-                                        <input type="password" id="new_password" name="new_password">
-                                        <label for="new_password">New password</label>
-                                    </div>
-
-                                    <div class="input-field">
-                                        <input type="password" id="re_new_password" name="re_new_password"
-                                               data-hint="Szia">
-                                        <label for="re_new_password">Retype new password</label>
+                                        <input type="password" id="re_password" name="re_password">
+                                        <label for="re_password">Retype password</label>
                                     </div>
 
                                     <div class="col s8 offset-s2 m10 offset-m1 " style="padding: 20px">
-                                        <input type="hidden" name="id" value="<?=$client['id']?>">
-                                        <button type="submit" name="modify"
+                                        <button type="submit" name="register"
                                                 class="left btn-floating btn-large teal waves-effect waves-light"><i
                                                 class="material-icons">done</i></button>
                                         <button type="reset" name="reset_default"
@@ -174,8 +167,10 @@ if (isset($_POST['modify'])) {
                             </div>
 
                         </div>
+
                     </div>
 
+                </form>
             </div>
 
         </div>

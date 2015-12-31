@@ -13,6 +13,15 @@ $upload_errors = [
     UPLOAD_ERR_EXTENSION => "Image upload stopped by extension."
 ];
 
+function get_image($table,$id){
+    $sql = "SELECT image FROM {$table} WHERE id='{$id}'";
+    $result = find_by_sql($sql);
+    $result = array_shift($result);
+    if ($result[0] !== null) {
+        return array_shift($result);
+    } else return 'default.jpg';
+}
+
 function check_image($file)
 {
     global $upload_errors;
@@ -58,9 +67,9 @@ function save_image($file)
 function delete_image($image_name)
 {
     $target_path = SITE_ROOT . DS . 'public' . DS . 'images' . DS . 'user' . DS . $image_name;
-    if (file_exists($target_path)) {
-        return unlink($target_path) ? true : "Image remove failed!";
-    } else return "The file {$image_name} doesn't exists!";
+        if(file_exists($target_path)) {
+            return $image_name!=="default.jpg" ? unlink($target_path) ? true : "Image remove failed!" : true;
+        } else return "The file {$image_name} doesn't exists!";
 }
 
 function update_image($old_image_name, $file)

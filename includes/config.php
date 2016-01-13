@@ -9,6 +9,8 @@ defined("SESSION_TIME") ? null : define("SESSION_TIME", 30); // in minutes
 
 defined("SYSTEM_SALT") ? null : define("SYSTEM_SALT", "SAL5K2VBa0P9A2j");
 
+defined("API_SALT") ? null : define("API_SALT","AKUS8it942jkH7i");
+
 $MAX_FILE_SIZE = $max_file_size = 5252880; //expressed in bytes
 //  10240       = 10 KB
 //  102400      = 100 KB

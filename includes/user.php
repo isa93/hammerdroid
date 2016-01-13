@@ -2,7 +2,7 @@
 
 require_once LIB_PATH . DS . "database.php";
 
-function authenticate($user, $password)
+function authenticate($user, $password,$admin = false)
 {
     ($mail = check_mail($user)) ? $mail = escape_value($mail) : $user = escape_value($user);
     $password = escape_value($password);
@@ -12,7 +12,9 @@ function authenticate($user, $password)
 
     if (($mail ? array_shift($m_check) : array_shift($u_check)) && array_shift($p_check)) {
 
-        $sql = "SELECT id FROM users WHERE ";
+        $sql = "SELECT id FROM ";
+        $admin===false ? $sql.= "clients" : $sql.= "users";
+        $sql .= " WHERE ";
         $sql .= "password='" . hash_password($password) . "' AND ";
         $mail ? $sql .= "email='{$mail}' " : $sql .= "username='{$user}' ";
         $sql .= "LIMIT 1 ";
@@ -42,7 +44,7 @@ function authenticate($user, $password)
 
 }
 
-function add_user()
+function add_user($admin= false)
 {
     global $WORLD_COUNTRIES;
     $_POST = array_filter($_POST, 'clean');
@@ -75,7 +77,9 @@ function add_user()
 
 
         if (empty($message)) {
-            $sql = "INSERT INTO users (username, email, password, first_name, last_name, country, birth_date, image, created_at) ";
+            $sql = "INSERT INTO ";
+            $admin ? $sql .= "users" : $sql .= "clients";
+            $sql .= " (username, email, password, first_name, last_name, country, birth_date, image, created_at) ";
             $sql .= "VALUES (";
             empty($username) ? $sql .= "NULL, " : $sql .= "'{$username}', ";
             $sql .= "'{$email}', ";
@@ -127,10 +131,10 @@ function modify_user(){
         !empty($password)  && $new_password !== $re_new_password ? $message .= "Incorrect password combination!\n" : null;
 
         if(empty($message)){
-            $auth = authenticate($email,$password);
+            $auth = authenticate($email,$password,true);
             if(array_shift($auth)===TRUE){
 //            dump($image);exit;
-                ($old_image = get_user_image($auth[0])) != 'default.jpg' ?
+                ($old_image = get_image('users',$auth[0])) != 'default.jpg' ?
                     $new_image = update_image($old_image,$image) :
                     $new_image = save_image($image);
                 if(!is_string($new_image)){
@@ -224,9 +228,11 @@ function generate_salt($string)
 //    } else return 'default.jpg';
 //}
 
-function get_user_name($id)
+function get_user_name($id,$admin = true)
 {
-    $sql = "SELECT first_name,last_name FROM users WHERE id='{$id}'";
+    $sql = "SELECT first_name,last_name FROM ";
+    $admin ? $sql .= "users" : $sql .= "clients";
+    $sql .= " WHERE id='{$id}'";
     $result = find_by_sql($sql);
     $result = array_shift($result);
     return $result['first_name'] . " " . $result['last_name'];

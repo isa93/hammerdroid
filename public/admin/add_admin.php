@@ -5,7 +5,7 @@ check_superuser();
 
 if (isset($_POST['register'])) {
     $_POST = array_filter($_POST, 'trim_value');
-    $check = add_user();
+    $check = add_user(true);
     if (array_shift($check) === TRUE) {
         redirect_to('list_admin.php');
     } else $message = array_shift($check);

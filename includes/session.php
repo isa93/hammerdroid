@@ -8,18 +8,25 @@ function check_login()
     isset($_SESSION['user_activity']) && time() - $_SESSION['user_activity'] < SESSION_TIME * 60 ? $_SESSION['user_activity'] = time() : redirect_to('login.php?exp');
 }
 
-function login()
+function login($admin = false)
 {
-    $username = filter_input(INPUT_POST, 'username');
-    $password = filter_input(INPUT_POST, 'password');
+//    $username = filter_input(INPUT_POST, 'username');
+//    $password = filter_input(INPUT_POST, 'password');
+
+    isset($_POST['username']) ? $username = $_POST['username'] : $username = "";
+    isset($_POST['password']) ? $password = $_POST['password'] : $password = "";
 
     if($username && $password){
-        $user = authenticate($username, $password);
+        $admin ?
+            $user = authenticate($username, $password,true):
+            $user = authenticate($username, $password);
 
         if (array_shift($user)) {
             $id = array_shift($user);
 
-            $sql = "UPDATE users SET ";
+            $sql = "UPDATE ";
+            $admin===false ? $sql .= "clients" : $sql .= "users";
+            $sql .= " SET ";
             $sql .= "last_login=now() ";
             $sql .= "WHERE id='{$id}'";
 

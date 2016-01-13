@@ -3,7 +3,7 @@ require_once "../../includes/initialize.php";
 
 if(isset($_POST['login'])){
     array_filter($_POST,'trim_value');
-    $login = login();
+    $login = login(true);
     if(array_shift($login)===TRUE){
         redirect_to('index.php');
     }else $message = array_shift($login);

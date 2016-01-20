@@ -109,8 +109,8 @@ if (isset($_POST['register'])) {
                                                 <?php
                                                 for ($i = 1; $i <= 12; $i++)
                                                     echo isset($_POST['month']) && $_POST['month'] == $i ?
-                                                        "<option value=\"{$i}\" selected>{$i}</option>" :
-                                                        "<option value=\"{$i}\">{$i}</option>";
+                                                        "<option value=\"{$i}\" selected>{$MONTHS[$i]}</option>" :
+                                                        "<option value=\"{$i}\">{$MONTHS[$i]}</option>";
                                                 ?>
                                             </select>
                                             <label for="month">Month</label>

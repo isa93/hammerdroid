@@ -4,7 +4,7 @@ check_login();
 
 if (isset($_POST['modify'])) {
     $_POST = array_filter($_POST, 'trim_value');
-    $check = modify_user();
+    $check = modify_user(true);
     if (array_shift($check) === TRUE) {
         redirect_to('profile.php');
     } else $message = array_shift($check);
@@ -108,8 +108,8 @@ if (isset($_POST['modify'])) {
                                                 <?php
                                                 for ($i = 1; $i <= 12; $i++)
                                                     echo isset($_POST['month']) && $_POST['month'] == $i || !isset($_POST['month']) && $birthday[1] == $i ?
-                                                        "<option value=\"{$i}\" selected>{$i}</option>" :
-                                                        "<option value=\"{$i}\">{$i}</option>";
+                                                        "<option value=\"{$i}\" selected>{$MONTHS[$i]}</option>" :
+                                                        "<option value=\"{$i}\">{$MONTHS[$i]}</option>";
                                                 ?>
                                             </select>
                                             <label for="month">Month</label>

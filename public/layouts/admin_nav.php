@@ -22,7 +22,7 @@
                         <a href="#" id="searchActivator"><i class="mdi-action-search"></i></a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-button navbar-profile" data-activates="profile-options">
+                        <a href="#" class="dropdown-button navbar-profile " data-activates="profile-options">
                             <img src="<?= $image_path ?>" class="circle z-depth-1">
                         </a>
                     </li>
@@ -185,7 +185,7 @@
             <div class="row">
                 <div class="card col s12 m8 offset-m2 l6 offset-l4 z-depth-1-half">
                     <div class="input-field">
-                        <input id="searchValue" type="text" class="col s9 m10" placeholder="Search...">
+                        <input id="searchField" type="text" class="col s9 m10" placeholder="Search...">
                         <label for="searchValue" class="hide">Search</label>
 
                         <div class="col s3 m2 right-align">
@@ -194,6 +194,9 @@
                                     style=""><i class="material-icons">search</i></button>
                         </div>
                     </div>
+                </div>
+                <div id="searchResult" class="card col s12 m8 offset-m2 l6 offset-l4 z-depth-1-half" style="">
+
                 </div>
             </div>
         </div>

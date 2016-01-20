@@ -100,11 +100,11 @@ $sort = sorter('cities','name_srb');
                                     <select name="id_countries" id="country">
                                         <option value="" <?= !isset($_POST['id_countries']) ? 'selected' : null?>>Choose</option>
                                         <?php
-                                        $countries = find_all('countries', 'name_srb');
+                                        $countries = find_all('countries', 'name_eng');
                                         foreach ($countries as $country)
                                             echo isset($_POST['id_countries']) && $_POST['id_countries'] == $country['id'] ?
-                                                "<option value=\"" . $country['id'] . "\" selected>" . htmlentities($country['name_srb']) . "</option>\n" :
-                                                "<option value=\"" . $country['id'] . "\">" . htmlentities($country['name_srb']) . "</option>\n";
+                                                "<option value=\"" . $country['id'] . "\" selected>" . htmlentities($country['name_eng']) . "</option>\n" :
+                                                "<option value=\"" . $country['id'] . "\">" . htmlentities($country['name_eng']) . "</option>\n";
                                         ?>
                                     </select>
                                     <label for="country">Country</label>
@@ -153,6 +153,7 @@ $sort = sorter('cities','name_srb');
 
                     <div class="card">
                         <span class="card-title blue-text accent-3" style="padding: 10px">All cities</span>
+                        <a href="download.php?table=cities" class="btn-flat blue-text accent-3 right" title="Download excel file!"><i class="fa fa-download"></i></a>
 
                         <div class="divider"></div><br>
 
@@ -196,7 +197,7 @@ $sort = sorter('cities','name_srb');
                                                 <td><?= $city['name_srb'] ?></td>
                                                 <td><?= $city['name_hun'] ?></td>
                                                 <td><?= $city['name_eng'] ?></td>
-                                                <td><?php $country = find_by_id('countries',$city['id_countries']);echo $country['name_srb'];?></td>
+                                                <td><?php $country = find_by_id('countries',$city['id_countries']);echo $country['name_eng'];?></td>
                                                 <td><?= $city['altitude'] ?> m</td>
                                                 <td><?= $city['wind_force'] ?> <sup>m</sup><strong>&sol;</strong><sub>s</sub></td>
                                                 <td>

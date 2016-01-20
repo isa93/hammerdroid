@@ -1,0 +1,1030 @@
+body {
+
+    background-image:url('../images/user-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+#form {
+    width: 400px;
+    height: 400px;
+    font-size: 14pt;
+    position: relative;
+    bottom: 100px;
+    left: 27%;
+    text-align: center;
+
+}
+
+#formposition {
+    text-align: justify;
+    position: relative;
+    right: 3%;
+
+
+}
+
+#container {
+
+    text-align: right;
+    position: relative;
+    color: forestgreen;
+    margin: auto;
+    padding: auto;
+    width: 1330px;
+    height: 800px;
+
+}
+
+#undo {
+    position: relative;
+    bottom: 100px;
+    right: 91%;
+
+}
+
+
+#undo1 {
+    position: relative;
+    bottom: 100px;
+    right: 91%;
+
+}
+
+.fadeInDownpos {
+    position: relative;
+    right: 22%;
+    top: 15%;
+}
+
+.fadeInUppos {
+    position: relative;
+    right: 15%;
+    top: 15%;
+    font-size: 45px;
+}
+
+.fadeInDownstat {
+    position: relative;
+    right: 22%;
+    top: 15%;
+}
+
+.fadeInUpstat {
+    position: relative;
+    right: 15%;
+    top: 15%;
+    font-size: 45px;
+}
+
+/***** Error text *****/
+
+#error {
+    position: relative;
+    bottom: 80px;
+    font-size: 15pt;
+    left: 800px;
+    font-style: inherit;
+    color: snow;
+}
+
+/***** Previous button animation *****/
+
+@keyframes hvr-bob {
+    0% {
+        -webkit-transform: translateY(-16px);
+        transform: translateY(-16px);
+    }
+
+    50% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+
+    100% {
+        -webkit-transform: translateY(-16px);
+        transform: translateY(-16px);
+    }
+}
+
+@keyframes hvr-bob-float {
+    100% {
+        -webkit-transform: translateY(-16px);
+        transform: translateY(-16px);
+    }
+}
+
+.hvr-bob {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+}
+.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {
+    -webkit-animation-name: hvr-bob-float, hvr-bob;
+    animation-name: hvr-bob-float, hvr-bob;
+    -webkit-animation-duration: .3s, 1.5s;
+    animation-duration: .3s, 1.5s;
+    -webkit-animation-delay: 0s, .3s;
+    animation-delay: 0s, .3s;
+    -webkit-animation-timing-function: ease-out, ease-in-out;
+    animation-timing-function: ease-out, ease-in-out;
+    -webkit-animation-iteration-count: 1, infinite;
+    animation-iteration-count: 1, infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: normal, alternate;
+    animation-direction: normal, alternate;
+}
+
+/***** HammerDroid text animation *****/
+
+.animated {
+    -webkit-animation-duration: 4s;
+    animation-duration: 4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 250%, 0);
+        transform: translate3d(0, 250%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+.fadeInUp {
+    position: relative;
+}
+
+/***** HammerDroid logo animation *****/
+
+@-webkit-keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0,-100%,0)
+
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    animation-iteration-count:1;
+    animation-duration: 3s;
+}
+
+/***** LEFT MENU *****/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+/* Starter CSS for Flyout Menu */
+#settings,
+#settings ul,
+#settings ul li,
+#settings ul ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: relative;
+    bottom: 12px;
+
+
+}
+#settings ul {
+    position: relative;
+    z-index: 597;
+    float: left;
+}
+#settings ul li {
+    float: left;
+    min-height: 1px;
+    line-height: 1em;
+    vertical-align: middle;
+    position: relative;
+    left: 10%;
+}
+#settings ul li.hover,
+#settings ul li:hover {
+    position: relative;
+    z-index: 599;
+    cursor: default;
+}
+#settings ul ul {
+    margin-top: 1px;
+    visibility: hidden;
+    position: absolute;
+    top: 1px;
+    left: 99%;
+    z-index: 598;
+    width: 100%;
+}
+#settings ul ul li {
+    float: none;
+}
+#settings ul ul ul {
+    top: 1px;
+    left: 99%;
+}
+#settings ul li:hover > ul {
+    visibility: visible;
+}
+#settings ul li {
+    float: none;
+}
+#settings ul ul li {
+    font-weight: normal;
+}
+/* Custom CSS Styles */
+#settings {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    width: 175px;
+}
+#settings ul a,
+#settings ul a:link,
+#settings ul a:visited {
+    display: block;
+    color: #848889;
+    text-decoration: none;
+    font-weight: 300;
+}
+#settings > ul {
+    float: none;
+}
+
+#settings > ul > li {
+    border-left: 3px solid #d7d8da;
+}
+#settings > ul > li > a {
+    padding: 10px 20px;
+}
+#settings > ul > li:hover {
+    border-left: 3px solid yellowgreen;
+}
+#settings ul li:hover > a {
+    color: yellowgreen;
+}
+#settings > ul > li:hover {
+    background: #f6f6f6;
+}
+/* Sub Menu */
+#settings ul ul a:link,
+#settings ul ul a:visited {
+    font-weight: 400;
+    font-size: 14px;
+}
+#settings ul ul {
+    width: 100px;
+    background: none;
+    border-left: 20px solid transparent;
+}
+#settings ul ul a {
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+#settings ul ul li {
+    padding: 0 20px;
+    background: #fff;
+}
+#settings ul ul li:last-child {
+    border-bottom: 3px solid #d7d8da;
+    padding-bottom: 10px;
+}
+#settings ul ul li:first-child {
+    padding-top: 10px;
+}
+#settings ul ul li:last-child > a {
+    border-bottom: none;
+}
+#settings ul ul li:first-child:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -20px;
+    top: 13px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid #fff;
+    border-bottom: 10px solid transparent;
+    border-top: 10px solid transparent;
+}
+
+/***** RIGHT MENU *****/
+
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+#cssmenu {
+    margin: 0;
+    width: 30%;
+    padding: 0;
+    line-height: 1;
+    display: block;
+    position: relative;
+    left: 70%;
+    font-family: 'PT Sans', sans-serif;
+}
+#cssmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+#cssmenu ul:after,
+#cssmenu:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+#cssmenu ul li {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+#cssmenu ul li a {
+    text-decoration: none;
+    display: block;
+    margin: 0;
+    -webkit-transition: color .2s ease;
+    -moz-transition: color .2s ease;
+    -ms-transition: color .2s ease;
+    -o-transition: color .2s ease;
+    transition: color .2s ease;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#cssmenu ul li ul {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+}
+#cssmenu ul li ul li {
+    max-height: 0;
+    position: absolute;
+    -webkit-transition: max-height 0.4s ease-out;
+    -moz-transition: max-height 0.4s ease-out;
+    -ms-transition: max-height 0.4s ease-out;
+    -o-transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s ease-out;
+    background: #ffffff;
+}
+#cssmenu ul li ul li.has-sub:after {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background: darkgreen;
+    z-index: 1;
+    top: 13px;
+    right: 15px;
+}
+#cssmenu.align-right ul li ul li.has-sub:after {
+    right: auto;
+    left: 15px;
+}
+#cssmenu ul li ul li.has-sub:before {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 0;
+    width: 0;
+    border: 3px solid transparent;
+    border-left-color: #ffffff;
+    z-index: 2;
+    top: 15px;
+    right: 15px;
+}
+#cssmenu.align-right ul li ul li.has-sub:before {
+    right: auto;
+    left: 15px;
+    border-left-color: transparent;
+    border-right-color: #ffffff;
+}
+#cssmenu ul li ul li a {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: none;
+    color: darkgreen;
+    letter-spacing: 0;
+    display: block;
+    width: 170px;
+    padding: 11px 10px 11px 20px;
+}
+#cssmenu ul li ul li:hover > a,
+#cssmenu ul li ul li.active > a {
+    color: darkgreen;
+}
+#cssmenu ul li ul li:hover:after,
+#cssmenu ul li ul li.active:after {
+    color: darkgreen;
+}
+#cssmenu ul li ul li:hover > ul {
+    left: 100%;
+    top: 0;
+}
+#cssmenu ul li ul li:hover > ul > li {
+    max-height: 72px;
+    position: relative;
+}
+#cssmenu > ul > li {
+    float: left;
+}
+#cssmenu.align-center > ul > li {
+    float: none;
+    display: inline-block;
+}
+#cssmenu.align-center > ul {
+    text-align: center;
+}
+#cssmenu.align-center ul ul {
+    text-align: left;
+}
+#cssmenu.align-right > ul {
+    float: right;
+}
+#cssmenu.align-right > ul > li:hover > ul {
+    left: auto;
+    right: 0;
+}
+#cssmenu.align-right ul ul li:hover > ul {
+    right: 100%;
+    left: auto;
+}
+#cssmenu.align-right ul ul li a {
+    text-align: right;
+}
+#cssmenu > ul > li:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    top: 0;
+    z-index: 0;
+    background: yellowgreen;
+    -webkit-transition: height .2s;
+    -moz-transition: height .2s;
+    -ms-transition: height .2s;
+    -o-transition: height .2s;
+    transition: height .2s;
+}
+#cssmenu > ul > li.has-sub > a {
+    padding-right: 40px;
+}
+#cssmenu > ul > li.has-sub > a:after {
+    display: block;
+    content: "";
+    background: #ffffff;
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    border-radius: 13px;
+    right: 14px;
+    top: 16px;
+}
+#cssmenu > ul > li.has-sub > a:before {
+    display: block;
+    content: "";
+    border: 4px solid transparent;
+    color: darkgreen;
+    z-index: 2;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 16px;
+    top: 21px;
+}
+#cssmenu > ul > li > a {
+    color: #ffffff;
+    padding: 15px 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 14px;
+    z-index: 2;
+    position: relative;
+}
+#cssmenu > ul > li:hover:after,
+#cssmenu > ul > li.active:after {
+    height: 100%;
+}
+#cssmenu > ul > li:hover > a,
+#cssmenu > ul > li.active > a {
+    color: darkgreen;
+}
+#cssmenu > ul > li:hover > a:after,
+#cssmenu > ul > li.active > a:after {
+    color: darkgreen;
+}
+#cssmenu > ul > li:hover > a:before,
+#cssmenu > ul > li.active > a:before {
+    border-top-color: #ffffff;
+}
+#cssmenu > ul > li:hover > ul {
+    left: 0;
+}
+#cssmenu > ul > li:hover > ul > li {
+    max-height: 72px;
+    position: relative;
+}
+#cssmenu #menu-button {
+    display: none;
+}
+#cssmenu > ul > li > a {
+    display: block;
+}
+#cssmenu > ul > li {
+    width: auto;
+}
+#cssmenu > ul > li > ul {
+    width: 170px;
+    display: block;
+}
+#cssmenu > ul > li > ul > li {
+    width: 170px;
+    display: block;
+}
+
+
+@media all and (max-width: 800px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px),
+only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1)
+and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and
+(min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+    #cssmenu > ul {
+        max-height: 0;
+        overflow: hidden;
+        -webkit-transition: max-height 0.35s ease-out;
+        -moz-transition: max-height 0.35s ease-out;
+        -ms-transition: max-height 0.35s ease-out;
+        -o-transition: max-height 0.35s ease-out;
+        transition: max-height 0.35s ease-out;
+    }
+    #cssmenu > ul > li > ul {
+        width: 100%;
+        display: block;
+    }
+    #cssmenu.align-right ul li a {
+        text-align: left;
+    }
+    #cssmenu > ul > li > ul > li {
+        width: 100%;
+        display: block;
+    }
+    #cssmenu.align-right ul ul li a {
+        text-align: left;
+    }
+    #cssmenu > ul > li > ul > li > a {
+        width: 100%;
+        display: block;
+    }
+    #cssmenu ul li ul li a {
+        width: 100%;
+    }
+    #cssmenu.align-center > ul {
+        text-align: left;
+    }
+    #cssmenu.align-center > ul > li {
+        display: block;
+    }
+    #cssmenu > ul.open {
+        max-height: 1000px;
+        border-top: 1px solid rgba(110, 110, 110, 0.25);
+    }
+    #cssmenu ul {
+        width: 100%;
+    }
+    #cssmenu ul > li {
+        float: none;
+        width: 100%;
+    }
+    #cssmenu ul li a {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 20px;
+    }
+    #cssmenu ul > li:after {
+        display: none;
+    }
+    #cssmenu ul li.has-sub > a:after,
+    #cssmenu ul li.has-sub > a:before,
+    #cssmenu ul li ul li.has-sub:after,
+    #cssmenu ul li ul li.has-sub:before {
+        display: none;
+    }
+    #cssmenu ul li ul,
+    #cssmenu ul li ul li ul,
+    #cssmenu ul li ul li:hover > ul,
+    #cssmenu.align-right ul li ul,
+    #cssmenu.align-right ul li ul li ul,
+    #cssmenu.align-right ul li ul li:hover > ul {
+        left: 0;
+        position: relative;
+        right: auto;
+    }
+    #cssmenu ul li ul li,
+    #cssmenu ul li:hover > ul > li {
+        max-height: 999px;
+        position: relative;
+        background: none;
+    }
+    #cssmenu ul li ul li a {
+        padding: 8px 20px 8px 35px;
+        color: #ffffff;
+    }
+    #cssmenu ul li ul ul li a {
+        padding: 8px 20px 8px 50px;
+    }
+    #cssmenu ul li ul li:hover > a {
+        color: darkgreen;
+    }
+    #cssmenu #menu-button {
+        display: block;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 15px 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+    #cssmenu #menu-button:after {
+        display: block;
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 22px;
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        right: 20px;
+        top: 16px;
+    }
+    #cssmenu #menu-button:before {
+        display: block;
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 22px;
+        border-top: 2px solid #ffffff;
+        right: 20px;
+        top: 26px;
+    }
+}
+
+/***** Sweep To Right - Green background *****/
+
+.hvr-sweep-to-right {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.hvr-sweep-to-right:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: darkgreen;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {
+    color: white;
+}
+.hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+/***** Team.html *****/
+
+
+#content {
+
+    text-align: center;
+    position: relative;
+    color: forestgreen;
+    margin: auto;
+    padding: auto;
+    width: 100%;
+    height: 565px;
+
+}
+
+
+#pic  {
+
+    position:relative;
+
+}
+
+
+
+@-webkit-keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    animation-iteration-count:1;
+    animation-duration: 4s;
+
+}
+
+#arrow{
+    position:relative;
+    right: 46.5%;
+    top: 1900px;
+}
+
+
+/***** Project.html *****/
+
+.descript {
+
+    font-size: 36px;
+    position: relative;
+    right: 38%;
+}
+
+.content {
+
+    text-align: center;
+    font-size: 24px;
+    margin: 0px 0px 0px 0;
+    padding: 0px 0px 0px 0px;
+    background: rgba(118, 205, 83, 0.35);
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 0px 0px 15px 15px;
+    -webkit-border: 0px 0px 15px 15px;
+    -webkit-box-shadow: rgba(70, 53, 29, 0.91) 0px 0px 5px;
+    -moz-box-shadow: rgba(50, 38, 15, 0.91) 0px 0px 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+    width: 100%;
+    color: darkgreen;
+
+}
+
+.slide {
+    position: absolute;
+    left: -1200px;
+    bottom: 600px;
+    width: 1000px;
+    height: 58px;
+    -webkit-animation: slide 5s forwards;
+    -webkit-animation-delay: -0.4s;
+    animation: slide 5s forwards;
+    animation-delay: -0.4s;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 170px; }
+}
+
+@keyframes slide {
+    100% { left: 170px; }
+}
+
+.content1 {
+
+    text-align: center;
+    font-size: 24px;
+    margin: 0px 0px 0px 0;
+    padding: 0px 0px 0px 0px;
+    background: rgba(118, 205, 83, 0.35);
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 0px 0px 15px 15px;
+    -webkit-border: 0px 0px 15px 15px;
+    -webkit-box-shadow: rgba(70, 53, 29, 0.91) 0px 0px 5px;
+    -moz-box-shadow: rgba(50, 38, 15, 0.91) 0px 0px 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+    width: 100%;
+    color: darkgreen;
+}
+
+.slide1 {
+    position: absolute;
+    left: -1200px;
+    bottom: 500px;
+    width: 1000px;
+    height: 58px;
+    -webkit-animation: slide 5s forwards;
+    -webkit-animation-delay: 0.1s;
+    animation: slide 5s forwards;
+    animation-delay: 0.1s;
+}
+
+@-webkit-keyframes slide1 {
+    100% { left: 170px; }
+}
+
+@keyframes slide1 {
+    100% { left: 170px; }
+}
+
+.content2 {
+
+    text-align: center;
+    font-size: 24px;
+    margin: 0px 0px 0px 0;
+    padding: 0px 0px 0px 0px;
+    background: rgba(118, 205, 83, 0.35);
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 0px 0px 15px 15px;
+    -webkit-border: 0px 0px 15px 15px;
+    -webkit-box-shadow: rgba(70, 53, 29, 0.91) 0px 0px 5px;
+    -moz-box-shadow: rgba(50, 38, 15, 0.91) 0px 0px 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+    width: 100%;
+    color: darkgreen;
+}
+
+.slide2 {
+    position: absolute;
+    left: -1200px;
+    bottom: 370px;
+    width: 1000px;
+    height: 88px;
+    -webkit-animation: slide 5s forwards;
+    -webkit-animation-delay: 0.6s;
+    animation: slide 5s forwards;
+    animation-delay: 0.6s;
+}
+
+@-webkit-keyframes slide2 {
+    100% { left: 170px; }
+}
+
+@keyframes slide2 {
+    100% { left: 170px; }
+}
+
+.content3 {
+
+    text-align: center;
+    font-size: 24px;
+    margin: 0px 0px 0px 0;
+    padding: 0px 0px 0px 0px;
+    background: rgba(118, 205, 83, 0.35);
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 0px 0px 15px 15px;
+    -webkit-border: 0px 0px 15px 15px;
+    -webkit-box-shadow: rgba(70, 53, 29, 0.91) 0px 0px 5px;
+    -moz-box-shadow: rgba(50, 38, 15, 0.91) 0px 0px 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+    width: 100%;
+    color: darkgreen;
+}
+
+.slide3 {
+    position: absolute;
+    left: -1200px;
+    bottom: 290px;
+    width: 1000px;
+    height: 38px;
+    -webkit-animation: slide 5s forwards;
+    -webkit-animation-delay: 1.1s;
+    animation: slide 5s forwards;
+    animation-delay: 1.1s;
+}
+
+@-webkit-keyframes slide3 {
+    100% { left: 170px; }
+}
+
+@keyframes slide3 {
+    100% { left: 170px; }
+}
+
+.content4 {
+
+    text-align: center;
+    font-size: 24px;
+    margin: 0px 0px 0px 0;
+    padding: 0px 0px 0px 0px;
+    background: rgba(118, 205, 83, 0.35);
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 0px 0px 15px 15px;
+    -webkit-border: 0px 0px 15px 15px;
+    -webkit-box-shadow: rgba(70, 53, 29, 0.91) 0px 0px 5px;
+    -moz-box-shadow: rgba(50, 38, 15, 0.91) 0px 0px 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
+    width: 100%;
+    color: darkgreen;
+}
+
+.slide4 {
+    position: absolute;
+    left: -1200px;
+    bottom: 200px;
+    width: 1000px;
+    height: 58px;
+    -webkit-animation: slide 5s forwards;
+    -webkit-animation-delay: 1.6s;
+    animation: slide 5s forwards;
+    animation-delay: 1.6s;
+}
+
+@-webkit-keyframes slide4 {
+    100% { left: 170px; }
+}
+
+@keyframes slide4 {
+    100% { left: 170px; }
+}

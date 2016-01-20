@@ -121,6 +121,7 @@ $sort = sorter('groups','name_srb');
 
                     <div class="card">
                         <span class="card-title blue-text accent-3" style="padding: 10px">All groups</span>
+                        <a href="download.php?table=groups" class="btn-flat blue-text accent-3 right" title="Download excel file!"><i class="fa fa-download"></i></a>
 
                         <div class="divider"></div><br>
 

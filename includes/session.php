@@ -2,10 +2,12 @@
 
 session_start();
 
-function check_login()
+function check_login($admin = true)
 {
-    isset($_SESSION['user_id']) ? null : redirect_to('login.php');
-    isset($_SESSION['user_activity']) && time() - $_SESSION['user_activity'] < SESSION_TIME * 60 ? $_SESSION['user_activity'] = time() : redirect_to('login.php?exp');
+    !isset($_SESSION['user_id']) ? $admin ? redirect_to('login.php') : redirect_to('../login.php') : null ;
+    if(isset($_SESSION['user_activity']) && time() - $_SESSION['user_activity'] > SESSION_TIME * 60)
+        $admin ? redirect_to('login.php?exp') : redirect_to('../login.php?exp');
+    else $_SESSION['user_activity'] = time() ;
 }
 
 function login($admin = false)

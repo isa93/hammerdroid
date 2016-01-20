@@ -11,11 +11,23 @@ defined("SYSTEM_SALT") ? null : define("SYSTEM_SALT", "SAL5K2VBa0P9A2j");
 
 defined("API_SALT") ? null : define("API_SALT","AKUS8it942jkH7i");
 
+$LANGUAGES = [
+    'English'=>'en',
+    'Magyar'=>'hu',
+    'Srpski'=>'rs'
+];
+
 $MAX_FILE_SIZE = $max_file_size = 5252880; //expressed in bytes
 //  10240       = 10 KB
 //  102400      = 100 KB
 //  1048576     = 1 MB
 //  10485760    = 10 MB
+
+$MONTHS = [
+    "Choose","January", "February", "March", "April", "May", "June", "July", "August",
+    "September", "October", "November", "December"
+];
+
 
 $WORLD_COUNTRIES = array(
     "Afghanistan",

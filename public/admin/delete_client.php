@@ -4,7 +4,7 @@ check_login();
 
 if(isset($_POST['delete'])){
     $_POST = array_filter($_POST,'trim_value');
-    $check = delete_client();
+    $check = delete_user();
     if(array_shift($check) == TRUE) {
         redirect_to('list_client.php');
     } else $message = array_shift($check);
@@ -39,10 +39,8 @@ if(isset($_POST['delete'])){
                         <div class="card medium">
 
                             <div class="card-image waves-effect waves-block waves-light" style="height: 300px">
-                                <a href="#">
-                                    <img class="activator" src="../images/user/<?= $image ?>"
-                                         alt="<?= $client['first_name'] ?> profile picture">
-                                </a>
+                                <img class="activator" src="../images/user/<?= $image ?>"
+                                     alt="<?= $client['first_name'] ?> profile picture">
                             </div>
 
                             <div class="card-content" style="height: 100px">
@@ -139,7 +137,7 @@ if(isset($_POST['delete'])){
                                                 <select id="month<?=$client['id']?>" name="month" disabled>
                                                     <?php
                                                     for($i = 1;$i<=12;$i++)
-                                                        echo $birthday[1]==$i ? "<option value=\"{$i}\" selected>{$i}</option>" : "<option value=\"{$i}\">{$i}</option>";
+                                                        echo $birthday[1]==$i ? "<option value=\"{$i}\" selected>{$MONTHS[$i]}</option>" : "<option value=\"{$i}\">{$MONTHS[$i]}</option>";
                                                     ?>
                                                 </select>
                                                 <label for="month<?=$client['id']?>">Month</label>

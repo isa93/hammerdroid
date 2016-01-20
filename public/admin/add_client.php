@@ -4,7 +4,7 @@ check_login();
 
 if (isset($_POST['register'])) {
     $_POST = array_filter($_POST, 'trim_value');
-    $check = add_client();
+    $check = add_user();
     if (array_shift($check) === TRUE) {
         redirect_to('list_client.php');
     } else $message = array_shift($check);
@@ -108,8 +108,8 @@ if (isset($_POST['register'])) {
                                                 <?php
                                                 for ($i = 1; $i <= 12; $i++)
                                                     echo isset($_POST['month']) && $_POST['month'] == $i ?
-                                                        "<option value=\"{$i}\" selected>{$i}</option>" :
-                                                        "<option value=\"{$i}\">{$i}</option>";
+                                                        "<option value=\"{$i}\" selected>{$MONTHS[$i]}</option>" :
+                                                        "<option value=\"{$i}\">{$MONTHS[$i]}</option>";
                                                 ?>
                                             </select>
                                             <label for="month">Month</label>

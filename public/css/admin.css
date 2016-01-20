@@ -15,18 +15,20 @@ html{
 }
 
 .chip-holder .chip {
-    margin: 2px;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 5px;
+    margin: 3px;
+    height: 27px;
+    line-height: 27px;
+    padding: 1px 9px;
     font-size: 13px;
     /*white-space: nowrap;*/
 }
 .chip-holder .chip i{
-    line-height: 25px;
+    line-height: 27px;
+    padding-left: 3px !important;
 }
 .chip-holder .chip span{
     white-space: nowrap;
+    text-shadow: 1px 1px 2px #966100;
 }
 
 /* ____________________________________LOGIN_________________________________________________*/
@@ -176,6 +178,9 @@ nav #profile-options{
     /*height:250px;*/
     text-align: center;
     background: #2979fe
+}
+.side-nav-header:hover{
+    background: inherit !important;
 }
 .side-nav-header img{
     margin-top: 10px;

@@ -98,17 +98,17 @@ $sort = sorter('buildings','name_srb');
                         <div class="col s10 offset-s1">
                             <div class="col s11 offset-s1">
                                     <?php
-                                    $groups = find_all('groups', 'name_srb');
+                                    $groups = find_all('groups', 'name_eng');
                                     foreach ($groups as $group)
                                         echo isset($_POST['id_groups']) && $_POST['id_groups'] == $group['id'] ?
                                             "<div class='col s6'>
                                                 <input type=\"radio\" name=\"id_groups\" id=\"{$group['id']}\" value=\"{$group['id']}\" checked>
-                                                <label for=\"{$group['id']}\">{$group['name_srb']}</label>
+                                                <label for=\"{$group['id']}\">{$group['name_eng']}</label>
                                             </div>"
                                             :
                                             "<div class='col s6'>
                                                 <input type=\"radio\" name=\"id_groups\" id=\"{$group['id']}\" value=\"{$group['id']}\">
-                                                <label for=\"{$group['id']}\">{$group['name_srb']}</label>
+                                                <label for=\"{$group['id']}\">{$group['name_eng']}</label>
                                             </div>"
                                             ;
                                     ?>
@@ -142,6 +142,7 @@ $sort = sorter('buildings','name_srb');
 
                 <div class="card">
                     <span class="card-title blue-text accent-3" style="padding: 10px">All buildings</span>
+                    <a href="download.php?table=buildings" class="btn-flat blue-text accent-3 right" title="Download excel file!"><i class="fa fa-download"></i></a>
 
                     <div class="divider"></div><br>
 
@@ -179,7 +180,7 @@ $sort = sorter('buildings','name_srb');
                                         <td><?= $building['name_srb'] ?></td>
                                         <td><?= $building['name_hun'] ?></td>
                                         <td><?= $building['name_eng'] ?></td>
-                                        <td><?php $group = find_by_id('groups',$building['id_groups']);echo $group['name_srb']?></td>
+                                        <td><?php $group = find_by_id('groups',$building['id_groups']);echo $group['name_eng']?></td>
                                         <td>
                                             <form action="buildings.php" method="post" role="form">
                                                 <input type="hidden" name="id" value="<?= $building['id'] ?>">

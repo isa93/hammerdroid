@@ -1,3 +1,38 @@
+function initUserWidget(){
+    userWidget();
+    setInterval(userWidget,3450);
+}
+var userWidgetStatus = true;
+function userWidget(){
+    var widget = $(".user-widget");
+    var items = $(".user-widget-item");
+    $.post("ajax.php",{userWidget:"szia"},function(output){
+        items.remove();
+        widget.append(output);
+        if(userWidgetStatus){
+            $(".user-widget-item").hide();
+            setTimeout(function () {
+                $(".user-widget-item").show()
+            },1000);
+            userWidgetStatus = false;
+        }
+    })
+}
+
+function initAdminWidget(){
+    setTimeout(adminWidget,500);
+    setInterval(adminWidget,5000);
+}
+
+function adminWidget(){
+    var widget = $(".admin-widget");
+    var items = $(".admin-widget-item");
+    $.post("ajax.php",{adminWidget:"szia"},function(output){
+        items.remove();
+        widget.append(output);
+    })
+}
+
 function alignLogin() {
     var wrapper = $('#login-wrapper');
     var display_height = $(document).height();
@@ -48,22 +83,36 @@ function readURL(input) {
 function searchInit() {
     var activator = $('#searchActivator');
     var search = $('#search');
-    var searchValue = $('#searchValue');
+    var searchField = $('#searchField');
     var btn = $('#searchBtn');
+    var searchResult = $('#searchResult');
 
-    activator.on('click', function () {
+    activator.on('click', function (e) {
+            e.preventDefault();
             search.toggle('slow');
             if (search.hasClass('active')) {
                 search.removeClass('active');
             } else {
                 search.addClass('active');
-                searchValue.focus();
+                searchField.focus();
             }
         }
     );
-    activator.on('click', function () {
-
+    $(searchField).on('keyup',function(){
+       var value = searchField.val();
+        $.post('ajax.php',{adminSearch:value},function(output){
+            searchResult.html(output);
+            searchResult.fadeIn('slow');
+        })
     });
+    $(btn).on('click',function(){
+        var value = searchField.val();
+        $.post('ajax.php',{adminSearch:value},function(output){
+            searchResult.html(output);
+            searchResult.fadeIn('slow');
+        })
+    });
+
     $('section').on('click', function () {
         if (search.hasClass('active')) {
             search.toggle('slow');
@@ -71,6 +120,8 @@ function searchInit() {
         }
     })
 }
+
+
 
 $("input[type='number']").keydown(function (e) {
     // Allow: backspace, delete, tab, escape, enter and .

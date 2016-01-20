@@ -76,7 +76,7 @@ check_login();
                                     <select id="month" name="month" disabled>
                                         <?php
                                         for($i = 1;$i<=12;$i++)
-                                            echo $birthday[1]==$i ? "<option value=\"{$i}\" selected>{$i}</option>" : "<option value=\"{$i}\">{$i}</option>";
+                                            echo $birthday[1]==$i ? "<option value=\"{$i}\" selected>{$MONTHS[$i]}</option>" : "<option value=\"{$i}\">{$MONTHS[$i]}</option>";
                                         ?>
                                     </select>
                                     <label for="month">Month</label>

@@ -69,7 +69,7 @@ function add_user($admin= false)
         !empty($month) && $month < 1 && $month > 12 ? $message .= "Wrong month selected!\n" : null;
         empty($day) ? $message .= "Select a birth day!\n" : null;
         !empty($day) && $day < 1 && $day > 31 ? $message .= "Wrong day selected!\n" : null;
-        !check_username_availability($username) ? $message .= "Username already taken!\n" : null;
+        !check_username_availability($username,$admin) ? $message .= "Username already taken!\n" : null;
         empty($email) ? $message.= "Fill in the e-mail field!\n" : null;
         !empty($email) && !check_mail($email) ? $message .= "Not a valid email address!\n" : null;
         empty($password) || empty($re_password) ? $message .= "Fill in the password fields!\n" : null;
@@ -97,7 +97,7 @@ function add_user($admin= false)
     } else return [false,"Wrong parameters!"];
 }
 
-function modify_user(){
+function modify_user($admin = false){
 
     global $WORLD_COUNTRIES;
     $_POST = array_filter($_POST, 'clean');
@@ -124,7 +124,7 @@ function modify_user(){
         !empty($month) && $month < 1 && $month > 12 ? $message .= "Wrong month selected!\n" : null;
         empty($day) ? $message .= "Select a birth day!\n" : null;
         !empty($day) && $day < 1 && $day > 31 ? $message .= "Wrong day selected!\n" : null;
-        !check_username($id,$username) ? !check_username_availability($username) ? $message .= "Username already taken!\n" : null : null;
+        !check_username($id,$username,$admin) ? !check_username_availability($username,$admin) ? $message .= "Username already taken!\n" : null : null;
         empty($email) ? $message.= "Fill in the e-mail field!\n" : null;
         !empty($email) && !check_mail($email) ? $message .= "Not a valid email address!\n" : null;
         empty($password) ? $message .= "Fill in the password field!\n" : null;
@@ -133,13 +133,15 @@ function modify_user(){
         if(empty($message)){
             $auth = authenticate($email,$password,true);
             if(array_shift($auth)===TRUE){
-//            dump($image);exit;
-                ($old_image = get_image('users',$auth[0])) != 'default.jpg' ?
+                $admin ? $old_image = get_image('users',$auth[0]) : $old_image = get_image('clients',$auth[0]);
+                $old_image != 'default.jpg' ?
                     $new_image = update_image($old_image,$image) :
                     $new_image = save_image($image);
                 if(!is_string($new_image)){
 
-                    $sql = "UPDATE users SET ";
+                    $sql = "UPDATE ";
+                    $admin ? $sql .= "users" : $sql .= "clients";
+                    $sql .= " SET ";
                     array_shift($new_image)==TRUE ? $sql .= "image='".array_shift($new_image)."', " : null;
                     $sql .= "first_name='{$first_name}', ";
                     $sql .= "last_name='{$last_name}', ";
@@ -159,7 +161,7 @@ function modify_user(){
     } else return [false,"Wrong parameters!"];
 }
 
-function delete_user(){
+function delete_user($admin = false){
     $_POST = array_filter($_POST, 'clean');
 
     foreach ($_POST as $var => $value)
@@ -169,14 +171,15 @@ function delete_user(){
         $message = "";
 
         empty($id) ? $message = "Id can't be empty!\n" : null;
-        $id==1 ? $message .= "Can't delete superuser account!\n" : null;
+        $admin ? $id==1 ? $message .= "Can't delete superuser account!\n" : null : null;
         !empty($id) && !is_numeric($id) ? $message .= "Id must be numeric!\n" : null;
 
         if(empty($message)){
             $image_check = delete_image(get_image('users',$id));
             if($image_check == true){
-                $sql = "DELETE from users ";
-                $sql .= "WHERE id='{$id}' ";
+                $sql = "DELETE FROM ";
+                $admin ? $sql .= "users" : $sql .= "clients";
+                $sql .= " WHERE id='{$id}' ";
                 $sql .= "LIMIT 1";
 
                 query($sql);
@@ -193,14 +196,20 @@ function get_superuser_status(){
     return $_SESSION['user_id']==1 ? true : false;
 }
 
-function check_username($id,$username){
-    $user = find_by_sql("SELECT username FROM users WHERE id='{$id}'");
+function check_username($id,$username,$admin = false){
+    $sql = "SELECT username FROM ";
+    $admin ? $sql .= 'users' : $sql .= 'clients';
+    $sql .= " WHERE id='{$id}'";
+    $user = find_by_sql($sql);
     return array_shift($user[0])==$username ? true : false;
 }
 
-function check_username_availability($username)
+function check_username_availability($username,$admin = false)
 {
-    $user = find_by_sql("SELECT id FROM users WHERE username='{$username}'");
+    $sql = "SELECT id FROM ";
+    $admin ? $sql .= 'users' : $sql .= 'clients';
+    $sql .= " WHERE username='{$username}'";
+    $user = find_by_sql($sql);
     return empty($user) ? true : false;
 }
 
